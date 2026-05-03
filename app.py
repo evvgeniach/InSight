@@ -1,9 +1,7 @@
 import streamlit as st
-import pandas as pd
-import plotly.express as px
-import json
-from src.data_loader import load_csv, build_schema, get_sample, get_summary
+from src.data_loader import load_file, load_csv, build_schema, get_sample, get_summary
 from src.analyser import ask_question
+from src.charts import render_chart
 
 st.set_page_config(page_title="InSight", page_icon="◈", layout="wide")
 
@@ -21,12 +19,12 @@ if "schema" not in st.session_state:
 
 with st.sidebar:
     st.header("Dataset")
-    option = st.radio("Choose data source", ["Upload CSV", "Demo: Companies House"])
+    option = st.radio("Choose data source", ["Upload CSV/Excel", "Demo: Companies House"])
 
-    if option == "Upload CSV":
-        file = st.file_uploader("Upload a CSV file", type=["csv"])
+    if option == "Upload CSV/Excel":
+        file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx", "xls"])
         if file and st.session_state.get("uploaded_filename") != file.name:
-            st.session_state.df = load_csv(file)
+            st.session_state.df = load_file(file)
             st.session_state.schema = build_schema(st.session_state.df)
             st.session_state.history = []
             st.session_state.messages = []
@@ -45,7 +43,26 @@ with st.sidebar:
         for col in summary["column_names"]:
             st.caption(f"· {col}")
 
-for msg in st.session_state.messages:
+        st.divider()
+        if st.button("New conversation", use_container_width=True):
+            st.session_state.messages = []
+            st.session_state.history = []
+            st.rerun()
+
+        if st.session_state.messages:
+            chat_text = "\n\n".join(
+                f"{'You' if m['role'] == 'user' else 'InSight'}: {m['content']}"
+                for m in st.session_state.messages
+            )
+            st.download_button(
+                "Export conversation",
+                data=chat_text,
+                file_name="insight_conversation.txt",
+                mime="text/plain",
+                use_container_width=True,
+            )
+
+for msg_idx, msg in enumerate(st.session_state.messages):
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
         if "stats" in msg and msg["stats"]:
@@ -53,20 +70,12 @@ for msg in st.session_state.messages:
             for i, stat in enumerate(msg["stats"]):
                 with cols[i]:
                     st.metric(label=stat["label"], value=stat["value"], help=stat.get("sub"))
-        if "chart" in msg and msg["chart"].get("type"):
-            chart = msg["chart"]
-            chart_df = pd.DataFrame({"label": chart["labels"], "value": chart["values"]})
-            if chart["type"] == "bar":
-                fig = px.bar(chart_df, x="label", y="value", title=chart.get("title"))
-            elif chart["type"] == "line":
-                fig = px.line(chart_df, x="label", y="value", title=chart.get("title"))
-            elif chart["type"] == "doughnut":
-                fig = px.pie(chart_df, names="label", values="value", title=chart.get("title"), hole=0.4)
-            st.plotly_chart(fig, use_container_width=True)
+        if "chart" in msg:
+            render_chart(msg["chart"])
         if "followups" in msg and msg["followups"]:
             st.caption("You might also ask:")
-            for q in msg["followups"]:
-                if st.button(q, key=f"{q}_{id(msg)}"):
+            for q_idx, q in enumerate(msg["followups"]):
+                if st.button(q, key=f"followup_{msg_idx}_{q_idx}"):
                     st.session_state.pending_question = q
 
 question = st.chat_input("Ask a question about your data...")
