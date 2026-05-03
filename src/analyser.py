@@ -1,7 +1,9 @@
 import os
 import json
 import anthropic
+import pandas as pd
 from dotenv import load_dotenv
+from src.executor import run_python
 
 load_dotenv()
 
@@ -9,31 +11,48 @@ client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 MAX_HISTORY = 10
 
 _INSTRUCTIONS = """You are InSight, an expert data analyst assistant.
-The user has loaded a dataset. Answer their questions using the data provided.
 
-Respond ONLY with a JSON object in this exact format:
+You have a `run_python` tool that executes real pandas code on the user's FULL DataFrame (variable: `df`).
+Use it for ALL numerical questions — counts, aggregations, correlations, rankings — instead of guessing from the sample.
+If multiple datasets are available they are in `datasets["name"]`.
+
+After computing results, respond with ONLY this JSON:
 {
   "insight": "2-3 sentence answer with specific numbers from the data",
-  "stats": [
-    {"label": "metric name", "value": "computed value", "sub": "optional context"}
-  ],
-  "chart": {
-    "type": "bar or line or doughnut or null",
-    "labels": ["label1", "label2"],
-    "values": [10, 20],
-    "title": "chart title"
-  },
+  "stats": [{"label": "metric name", "value": "computed value", "sub": "optional context"}],
+  "chart": {"type": "bar|line|doughnut|null", "labels": [...], "values": [...], "title": "..."},
   "followups": ["question 1", "question 2", "question 3"]
 }
 
 Rules:
 - stats: 2-4 key metrics. Empty array if not applicable.
-- chart: only include when a chart genuinely adds value. Set type to null if not.
+- chart: only when it genuinely adds value. type=null otherwise.
 - followups: 3 smart follow-up questions based on what you found.
-- Return ONLY the JSON. No markdown, no explanation outside the JSON."""
+- Return ONLY the JSON. No markdown fences, no explanation outside the JSON."""
+
+_TOOLS = [
+    {
+        "name": "run_python",
+        "description": (
+            "Execute Python/pandas code on the full DataFrame (variable: df). "
+            "Use print() to output results. pandas (pd) and numpy (np) are available. "
+            "Other loaded datasets are in datasets['name']."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Python code to run. Use print() to emit results.",
+                }
+            },
+            "required": ["code"],
+        },
+    }
+]
 
 
-def _parse_json(text):
+def _parse_json(text: str) -> dict | None:
     try:
         clean = text.replace("```json", "").replace("```", "").strip()
         return json.loads(clean)
@@ -41,35 +60,63 @@ def _parse_json(text):
         return None
 
 
-def _call_api(system_blocks, history):
-    response = client.beta.prompt_caching.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=4096,
-        system=system_blocks,
-        messages=history,
-    )
-    return response.content[0].text
+def _agentic_loop(system_blocks: list, messages: list, df: pd.DataFrame, datasets: dict) -> str:
+    working = list(messages)
+    for _ in range(8):
+        response = client.beta.prompt_caching.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=4096,
+            system=system_blocks,
+            messages=working,
+            tools=_TOOLS,
+        )
+
+        if response.stop_reason == "tool_use":
+            working.append({"role": "assistant", "content": response.content})
+            tool_results = []
+            for block in response.content:
+                if block.type == "tool_use":
+                    output = run_python(block.input["code"], df, datasets)
+                    tool_results.append({
+                        "type": "tool_result",
+                        "tool_use_id": block.id,
+                        "content": output,
+                    })
+            working.append({"role": "user", "content": tool_results})
+        else:
+            return next((b.text for b in response.content if hasattr(b, "text")), "")
+
+    return "Error: too many tool calls without a final answer."
 
 
-def ask_question(schema, sample, data_json, question, history):
+def ask_question(
+    schema: str,
+    sample: str,
+    question: str,
+    history: list,
+    df: pd.DataFrame,
+    datasets: dict = None,
+) -> tuple[dict, list]:
     system_blocks = [
         {"type": "text", "text": _INSTRUCTIONS, "cache_control": {"type": "ephemeral"}},
-        {"type": "text", "text": f"SCHEMA:\n{schema}\n\nSAMPLE (first 5 rows):\n{sample}\n\nFULL DATA:\n{data_json}", "cache_control": {"type": "ephemeral"}},
+        {"type": "text", "text": f"SCHEMA:\n{schema}\n\nSAMPLE (first 5 rows):\n{sample}", "cache_control": {"type": "ephemeral"}},
     ]
 
     if len(history) > MAX_HISTORY:
         history = history[-MAX_HISTORY:]
 
-    history.append({"role": "user", "content": question})
-    raw = _call_api(system_blocks, history)
-    history.append({"role": "assistant", "content": raw})
+    raw = _agentic_loop(system_blocks, history + [{"role": "user", "content": question}], df, datasets or {})
+
+    history = history + [
+        {"role": "user", "content": question},
+        {"role": "assistant", "content": raw},
+    ]
 
     result = _parse_json(raw)
     if result is None:
-        history.append({"role": "user", "content": "Return ONLY valid JSON with no other text."})
-        raw = _call_api(system_blocks, history)
-        history.append({"role": "assistant", "content": raw})
-        result = _parse_json(raw)
+        retry_msgs = history + [{"role": "user", "content": "Return ONLY valid JSON with no other text."}]
+        raw2 = _agentic_loop(system_blocks, retry_msgs, df, datasets or {})
+        result = _parse_json(raw2)
 
     if result is None:
         result = {"insight": raw, "stats": [], "chart": {"type": None}, "followups": []}
