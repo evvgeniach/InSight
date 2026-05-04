@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {tertiary: "#615e58", "surface-bright": "#fef9f1", "on-tertiary-fixed-variant": "#494741", "on-surface": "#1d1c17", "surface-container-high": "#ece8e0", "inverse-surface": "#32302b", "on-secondary-container": "#6e2a00", "tertiary-fixed": "#e7e2da", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#7a3000", "on-tertiary-container": "#32302b", surface: "#fef9f1", "on-primary-fixed": "#001d34", "surface-dim": "#ded9d2", primary: "#416182", "secondary-fixed-dim": "#ffb693", "on-tertiary": "#ffffff", "surface-tint": "#416182", "on-secondary-fixed": "#351000", outline: "#73777e", "primary-container": "#7b9bbf", "on-surface-variant": "#43474d", "on-secondary": "#ffffff", "secondary-container": "#fd8e55", "on-background": "#1d1c17", "on-primary": "#ffffff", "surface-container-highest": "#e7e2da", "surface-container-low": "#f8f3eb", "on-error": "#ffffff", "on-primary-container": "#0c3251", "inverse-primary": "#a9c9ef", "on-tertiary-fixed": "#1d1b17", "secondary-fixed": "#ffdbcc", "tertiary-container": "#9c9891", background: "#fef9f1", secondary: "#9c440f", "primary-fixed": "#d0e4ff", "surface-container-lowest": "#ffffff", error: "#ba1a1a", "tertiary-fixed-dim": "#cac6be", "surface-container": "#f2ede5", "on-primary-fixed-variant": "#284969", "primary-fixed-dim": "#a9c9ef", "surface-variant": "#e7e2da", "inverse-on-surface": "#f5f0e8", "outline-variant": "#c3c7ce", "error-container": "#ffdad6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "24px", lg: "24px", unit: "8px", md: "16px", sm: "8px", xxl: "64px", "container-max": "1440px", xs: "4px", xl: "40px"}, fontFamily: {h2: ["Metropolis"], "body-lg": ["Inter"], h1: ["Metropolis"], h3: ["Metropolis"], "label-caps": ["Inter"], display: ["Metropolis"], "body-sm": ["Inter"], "data-tabular": ["Inter"], "body-md": ["Inter"], headline: ["Metropolis"], body: ["Inter"], label: ["Inter"]}, fontSize: {h2: ["24px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500"}], "body-lg": ["18px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], h3: ["20px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "500"}], "label-caps": ["12px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], "data-tabular": ["14px", {lineHeight: "1", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+<style>
+        body {
+            background-color: #fef9f1;
+            color: #1d1c17;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e7e2da;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<aside class="fixed left-0 top-0 h-full w-[280px] border-r bg-stone-50 border-stone-200 flex flex-col py-8 px-6 z-50">
+<div class="mb-10">
+<h1 class="text-orange-700 font-serif font-bold text-2xl tracking-tight">InSight</h1>
+<p class="text-stone-500 font-sans text-sm tracking-tight">Editorial Analytics</p>
+</div>
+<button class="mb-8 flex items-center justify-center gap-2 bg-primary text-on-primary py-3 px-4 rounded-xl font-medium shadow-sm transition-transform active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Analysis
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-100 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-sans tracking-tight">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#7B9BBF] font-semibold border-r-2 border-[#7B9BBF] bg-blue-50/50" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-sans tracking-tight">Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-100 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-sans tracking-tight">Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-100 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-sans tracking-tight">Archives</span>
+</a>
+</nav>
+<div class="pt-8 border-t border-stone-200 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-stone-500 hover:bg-stone-100 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-stone-500 hover:bg-stone-100 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<div class="mt-6 flex items-center gap-3 px-4">
+<div class="w-8 h-8 rounded-full bg-stone-200 overflow-hidden">
+<img alt="User profile" data-alt="A professional headshot of a young male data analyst in a minimalist workspace. The lighting is soft and natural, emphasizing a high-end, editorial feel. The background features warm beige tones and clean lines, maintaining the sophisticated, light-mode aesthetic of a premium corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZZzWtVXPKeDPbT9o7X9z0wuPso_3hCX7ru_CfEjoxZObyz_fH-IKk2kOhf_fugXy9jbzMGkiQcc9Dzt9m1feDGhPs2XGKnoB8v17q67H_DAObpq-hIdZT1Z9LRT3PJwtBmCg9pAQlRFQ2ukOQS3CZg2EOmB-2Ab5G0EjkpWgHxAuRbpthUXR-Ceot-tpHQB4RAP0v_gWpJwY-uiZ-G5KrepGgXK58tZpKPQLZUSyL1WK-RmqUMYIS_oesYRD6bh-QMaSBpyGSCHk"/>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold">Alex Chen</span>
+<span class="text-[10px] text-stone-400">Lead Analyst</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="ml-[280px] min-h-screen bg-background">
+<header class="sticky top-0 z-40 w-full border-b border-stone-200 bg-white/80 backdrop-blur-md">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-8">
+<span class="text-stone-900 font-bold tracking-tight font-h3">Workspace</span>
+<nav class="flex gap-6">
+<a class="text-stone-500 font-sans text-sm font-medium pb-4 hover:text-[#7B9BBF] transition-all" href="#">Drafts</a>
+<a class="text-[#7B9BBF] border-b-2 border-[#7B9BBF] font-sans text-sm font-medium pb-4" href="#">Published</a>
+<a class="text-stone-500 font-sans text-sm font-medium pb-4 hover:text-[#7B9BBF] transition-all" href="#">Scheduled</a>
+<a class="text-stone-500 font-sans text-sm font-medium pb-4 hover:text-[#7B9BBF] transition-all" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container-low px-3 py-2 rounded-lg border border-stone-200">
+<span class="material-symbols-outlined text-stone-400 text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 text-on-surface" placeholder="Search datasets..." type="text"/>
+</div>
+<button class="text-stone-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications_none">notifications_none</span>
+</button>
+<button class="text-stone-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="max-w-[1440px] mx-auto px-xl py-xl">
+<div class="mb-xxl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-gutter mb-8">
+<div>
+<span class="font-label-caps text-tertiary uppercase tracking-widest mb-2 block">Analytical Explorer</span>
+<h2 class="font-h1 text-on-surface">Data Sources</h2>
+</div>
+<div class="flex gap-4">
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-stone-200 rounded-lg px-4 py-2.5 pr-10 text-sm font-medium focus:ring-2 focus:ring-primary-container outline-none">
+<option>Active Dataset: Q3 Performance</option>
+<option>Historical Trends 2023</option>
+<option>Regional Growth Matrix</option>
+<option>User Engagement API</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<button class="flex items-center gap-2 bg-surface-container-lowest border border-stone-200 text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Filters
+                        </button>
+<button class="flex items-center gap-2 bg-surface-container-lowest border border-stone-200 text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12">
+<div class="bg-surface-container-lowest rounded-xl border border-[#E2DDD5] shadow-[0_4px_12px_-2px_rgba(123,155,191,0.05)] overflow-hidden">
+<div class="px-lg py-md border-b border-stone-100 flex items-center justify-between bg-stone-50/30">
+<h3 class="font-h3 text-on-surface">Active Dataset</h3>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-xs font-medium text-stone-500">Live Connection</span>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-50/50">
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">ID</th>
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">Metric Name</th>
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">Category</th>
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">Current Value</th>
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">Status</th>
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">Trend</th>
+<th class="px-lg py-4 font-label-caps text-stone-400 border-b border-stone-100">Last Sync</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-50">
+<tr class="hover:bg-stone-50/50 transition-colors">
+<td class="px-lg py-5 font-data-tabular text-stone-500">#DS-4021</td>
+<td class="px-lg py-5 font-body-md font-medium">Monthly Recurring Revenue</td>
+<td class="px-lg py-5">
+<span class="px-3 py-1 bg-blue-50 text-[#7B9BBF] rounded-full text-xs font-semibold">Financial</span>
+</td>
+<td class="px-lg py-5 font-data-tabular text-lg">$142,500.00</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-2 text-sm text-stone-600">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                                    Optimal
+                                                </div>
+</td>
+<td class="px-lg py-5">
+<div class="h-8 w-24 bg-stone-100 rounded flex items-end px-1 pb-1 gap-0.5">
+<div class="bg-primary h-1/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-2/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-1/3 w-full rounded-t-sm"></div>
+<div class="bg-primary h-3/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-full w-full rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-lg py-5 text-stone-400 text-sm">2 mins ago</td>
+</tr>
+<tr class="hover:bg-stone-50/50 transition-colors">
+<td class="px-lg py-5 font-data-tabular text-stone-500">#DS-4022</td>
+<td class="px-lg py-5 font-body-md font-medium">Customer Acquisition Cost</td>
+<td class="px-lg py-5">
+<span class="px-3 py-1 bg-stone-100 text-stone-500 rounded-full text-xs font-semibold">Marketing</span>
+</td>
+<td class="px-lg py-5 font-data-tabular text-lg">$84.20</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-2 text-sm text-stone-600">
+<span class="material-symbols-outlined text-stone-300 text-sm" data-icon="info">info</span>
+                                                    Review Required
+                                                </div>
+</td>
+<td class="px-lg py-5">
+<div class="h-8 w-24 bg-stone-100 rounded flex items-end px-1 pb-1 gap-0.5">
+<div class="bg-secondary h-full w-full rounded-t-sm"></div>
+<div class="bg-secondary h-3/4 w-full rounded-t-sm"></div>
+<div class="bg-secondary h-2/3 w-full rounded-t-sm"></div>
+<div class="bg-secondary h-1/2 w-full rounded-t-sm"></div>
+<div class="bg-secondary h-1/4 w-full rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-lg py-5 text-stone-400 text-sm">15 mins ago</td>
+</tr>
+<tr class="hover:bg-stone-50/50 transition-colors">
+<td class="px-lg py-5 font-data-tabular text-stone-500">#DS-4023</td>
+<td class="px-lg py-5 font-body-md font-medium">Net Promoter Score</td>
+<td class="px-lg py-5">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-container rounded-full text-xs font-semibold">Support</span>
+</td>
+<td class="px-lg py-5 font-data-tabular text-lg">72.4</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-2 text-sm text-stone-600">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                                    Optimal
+                                                </div>
+</td>
+<td class="px-lg py-5">
+<div class="h-8 w-24 bg-stone-100 rounded flex items-end px-1 pb-1 gap-0.5">
+<div class="bg-primary h-1/3 w-full rounded-t-sm"></div>
+<div class="bg-primary h-2/3 w-full rounded-t-sm"></div>
+<div class="bg-primary h-2/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-3/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-5/6 w-full rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-lg py-5 text-stone-400 text-sm">1 hour ago</td>
+</tr>
+<tr class="hover:bg-stone-50/50 transition-colors">
+<td class="px-lg py-5 font-data-tabular text-stone-500">#DS-4024</td>
+<td class="px-lg py-5 font-body-md font-medium">Active User Velocity</td>
+<td class="px-lg py-5">
+<span class="px-3 py-1 bg-orange-50 text-secondary rounded-full text-xs font-semibold">Growth</span>
+</td>
+<td class="px-lg py-5 font-data-tabular text-lg">12.5%</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-2 text-sm text-stone-600">
+<span class="material-symbols-outlined text-yellow-600 text-sm" data-icon="warning">warning</span>
+                                                    Fluctuating
+                                                </div>
+</td>
+<td class="px-lg py-5">
+<div class="h-8 w-24 bg-stone-100 rounded flex items-end px-1 pb-1 gap-0.5">
+<div class="bg-primary h-1/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-3/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-1/4 w-full rounded-t-sm"></div>
+<div class="bg-primary h-full w-full rounded-t-sm"></div>
+<div class="bg-primary h-1/2 w-full rounded-t-sm"></div>
+</div>
+</td>
+<td class="px-lg py-5 text-stone-400 text-sm">Just now</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-lg py-4 border-t border-stone-100 flex items-center justify-between bg-stone-50/20">
+<div class="text-sm text-stone-500">
+                                    Showing <span class="font-semibold text-on-surface">1-4</span> of <span class="font-semibold text-on-surface">24</span> results
+                                </div>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-stone-200 text-stone-400 hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-sm font-medium">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-transparent text-stone-500 hover:bg-stone-50 text-sm font-medium transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-transparent text-stone-500 hover:bg-stone-50 text-sm font-medium transition-colors">3</button>
+<span class="px-2 text-stone-400">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-transparent text-stone-500 hover:bg-stone-50 text-sm font-medium transition-colors">6</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-stone-200 text-stone-500 hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl p-lg border border-[#E2DDD5] h-full">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-h3 text-on-surface">Dataset Composition</h3>
+<button class="text-sm text-[#7B9BBF] font-medium hover:underline">View Analysis</button>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-stone-500">Transactional Data</span>
+<span class="font-semibold">64%</span>
+</div>
+<div class="h-2 bg-stone-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[64%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-stone-500">User Behavior</span>
+<span class="font-semibold">22%</span>
+</div>
+<div class="h-2 bg-stone-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[22%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-stone-500">Inventory Logs</span>
+<span class="font-semibold">14%</span>
+</div>
+<div class="h-2 bg-stone-100 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[14%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center">
+<div class="relative w-40 h-40">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="text-stone-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="64, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-h3 font-bold">12.4GB</span>
+<span class="text-[10px] text-stone-400 uppercase tracking-widest">Total Size</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4">
+<div class="bg-primary text-on-primary rounded-xl p-lg border border-primary relative overflow-hidden h-full shadow-lg">
+<div class="relative z-10">
+<span class="font-label-caps text-blue-200 uppercase mb-4 block">Insight Alert</span>
+<h3 class="font-h2 mb-4">Anomaly detected in Customer Acquisition</h3>
+<p class="text-blue-100 text-sm mb-8 leading-relaxed">We've identified a 14.2% deviation from the predicted trend in the marketing dataset. This may affect your Q3 revenue forecasting models.</p>
+<button class="w-full py-3 bg-white text-primary rounded-lg font-bold text-sm hover:bg-stone-50 transition-colors shadow-md">
+                                Investigate Anomalies
+                            </button>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]" data-icon="query_stats">query_stats</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

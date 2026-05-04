@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {tertiary: "#615e58", "surface-bright": "#fef9f1", "on-tertiary-fixed-variant": "#494741", "on-surface": "#1d1c17", "surface-container-high": "#ece8e0", "inverse-surface": "#32302b", "on-secondary-container": "#6e2a00", "tertiary-fixed": "#e7e2da", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#7a3000", "on-tertiary-container": "#32302b", surface: "#fef9f1", "on-primary-fixed": "#001d34", "surface-dim": "#ded9d2", primary: "#416182", "secondary-fixed-dim": "#ffb693", "on-tertiary": "#ffffff", "surface-tint": "#416182", "on-secondary-fixed": "#351000", outline: "#73777e", "primary-container": "#7b9bbf", "on-surface-variant": "#43474d", "on-secondary": "#ffffff", "secondary-container": "#fd8e55", "on-background": "#1d1c17", "on-primary": "#ffffff", "surface-container-highest": "#e7e2da", "surface-container-low": "#f8f3eb", "on-error": "#ffffff", "on-primary-container": "#0c3251", "inverse-primary": "#a9c9ef", "on-tertiary-fixed": "#1d1b17", "secondary-fixed": "#ffdbcc", "tertiary-container": "#9c9891", background: "#fef9f1", secondary: "#9c440f", "primary-fixed": "#d0e4ff", "surface-container-lowest": "#ffffff", error: "#ba1a1a", "tertiary-fixed-dim": "#cac6be", "surface-container": "#f2ede5", "on-primary-fixed-variant": "#284969", "primary-fixed-dim": "#a9c9ef", "surface-variant": "#e7e2da", "inverse-on-surface": "#f5f0e8", "outline-variant": "#c3c7ce", "error-container": "#ffdad6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "24px", lg: "24px", unit: "8px", md: "16px", sm: "8px", xxl: "64px", "container-max": "1440px", xs: "4px", xl: "40px"}, fontFamily: {h2: ["Metropolis"], "body-lg": ["Inter"], h1: ["Metropolis"], h3: ["Metropolis"], "label-caps": ["Inter"], display: ["Metropolis"], "body-sm": ["Inter"], "data-tabular": ["Inter"], "body-md": ["Inter"], headline: ["Metropolis"], body: ["Inter"], label: ["Inter"]}, fontSize: {h2: ["24px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500"}], "body-lg": ["18px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], h3: ["20px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "500"}], "label-caps": ["12px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], "data-tabular": ["14px", {lineHeight: "1", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- Fixed Side Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[280px] border-r border-stone-200 bg-stone-50 flex flex-col py-8 px-6 z-50">
+<div class="mb-12">
+<h1 class="text-orange-700 font-serif font-bold text-2xl tracking-tight">InSight</h1>
+<p class="text-stone-500 text-body-sm font-body-sm">Editorial Analytics</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">database</span>
+<span>Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Archives</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#7B9BBF] font-semibold border-r-2 border-[#7B9BBF] bg-blue-50/50 transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<div class="pt-6 mt-6 border-t border-stone-200">
+<div class="flex items-center gap-3 px-2">
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover" data-alt="A professional portrait of a senior data analyst in a brightly lit, modern editorial office setting. The individual has a focused yet approachable expression, wearing contemporary business casual attire. The background is a soft-focus clean workspace with warm wooden textures and large windows reflecting soft daylight, emphasizing an airy and intellectual atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmYQTRt4k9T_gu9e1Dyx70MO1f5aer2fwSqdS1XRkhobAhBWmWDJW9oc91biY67246mgbChE5GC_mlg2zAEeg5Wm5wY59TEbRMsxEc7cy932LIYl5x8ukHhoBJlndGxUuxYVLfapNj83NZBd2fsl4iQ5Jcg61ajOwYhXM1wtx2vSOUJOzD0atShJpCHrh0QnJUt8-g013m0dIdYG0Whakkf0Iu3x8afOaH0AjTpgrzRNFx_pRTkDbP7zCKKXTlR22jMW-JmtmE5OY"/>
+<div class="overflow-hidden">
+<p class="font-body-sm text-body-sm font-semibold truncate">Julian Vance</p>
+<p class="font-body-sm text-body-sm text-stone-500 truncate">Senior Editor</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] min-h-screen">
+<!-- Top Sticky Header -->
+<header class="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-stone-200 px-xl h-16 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<span class="text-stone-900 font-bold tracking-tight font-body-md text-body-md">Workspace</span>
+<div class="h-4 w-[1px] bg-stone-300"></div>
+<nav class="flex gap-8">
+<a class="text-stone-500 hover:text-[#7B9BBF] transition-all font-body-sm text-body-sm" href="#">Drafts</a>
+<a class="text-stone-500 hover:text-[#7B9BBF] transition-all font-body-sm text-body-sm" href="#">Published</a>
+<a class="text-stone-500 hover:text-[#7B9BBF] transition-all font-body-sm text-body-sm" href="#">Scheduled</a>
+<a class="text-stone-500 hover:text-[#7B9BBF] transition-all font-body-sm text-body-sm" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-500 hover:text-[#7B9BBF] transition-all">
+<span class="material-symbols-outlined">notifications_none</span>
+</button>
+<button class="p-2 text-stone-500 hover:text-[#7B9BBF] transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<div class="max-w-[1440px] mx-auto p-xl">
+<!-- Hero Section -->
+<section class="mb-xxl">
+<span class="text-label-caps font-label-caps text-[#7B9BBF] uppercase mb-4 block">Knowledge Base</span>
+<h2 class="text-display font-display text-on-surface mb-md">How can we help you synthesize today?</h2>
+<div class="relative max-w-2xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-[#E2DDD5] bg-surface-container-low focus:ring-2 focus:ring-[#7B9BBF]/20 focus:border-[#7B9BBF] outline-none transition-all font-body-md text-body-md" placeholder="Search documentation, tutorials, and advanced query syntax..." type="text"/>
+</div>
+</section>
+<!-- Bento Grid Documentation -->
+<section class="grid grid-cols-12 gap-lg mb-xxl">
+<!-- Getting Started Card -->
+<div class="col-span-12 md:col-span-8 bg-surface-container-lowest rounded-xl p-lg border border-[#E2DDD5] shadow-sm flex flex-col justify-between group cursor-pointer hover:shadow-md transition-all">
+<div>
+<div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[#7B9BBF]">rocket_launch</span>
+</div>
+<h3 class="text-h2 font-h2 mb-sm">Getting Started</h3>
+<p class="text-stone-500 font-body-md text-body-md max-w-xl">Master the fundamentals of editorial analytics. Learn how to connect your data sources, configure initial sentiment models, and generate your first executive summary in under five minutes.</p>
+</div>
+<div class="mt-xl flex items-center gap-2 text-[#7B9BBF] font-semibold">
+<span class="text-body-sm font-body-sm">View 12 core lessons</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Pro Tip Box -->
+<div class="col-span-12 md:col-span-4 bg-[#7B9BBF] rounded-xl p-lg text-white flex flex-col">
+<span class="material-symbols-outlined text-3xl mb-md">lightbulb</span>
+<h3 class="text-h3 font-h3 mb-sm">Pro Tip</h3>
+<p class="text-white/90 font-body-sm text-body-sm leading-relaxed mb-md">Use the <code class="bg-white/20 px-1 rounded">--compare</code> flag in your natural language queries to instantly contrast historical quarterly performances against current live metrics.</p>
+<a class="mt-auto text-white font-bold text-body-sm flex items-center gap-1 hover:underline" href="#">Explore CLI options</a>
+</div>
+<!-- Advanced Queries Card -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-lowest rounded-xl p-lg border border-[#E2DDD5] shadow-sm hover:shadow-md transition-all group">
+<div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary">terminal</span>
+</div>
+<h3 class="text-h3 font-h3 mb-sm">Advanced Queries</h3>
+<p class="text-stone-500 font-body-sm text-body-sm mb-lg">Dive deep into boolean logic, custom weighting systems, and multi-source API integration for complex reporting.</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-stone-100 text-stone-600 px-3 py-1 rounded-full text-[12px] font-medium">JSON</span>
+<span class="bg-stone-100 text-stone-600 px-3 py-1 rounded-full text-[12px] font-medium">SQL</span>
+<span class="bg-stone-100 text-stone-600 px-3 py-1 rounded-full text-[12px] font-medium">Python</span>
+</div>
+</div>
+<!-- Visual Documentation Card -->
+<div class="col-span-12 md:col-span-8 relative rounded-xl overflow-hidden min-h-[300px] group border border-[#E2DDD5]">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated data visualization dashboard shown on a high-resolution monitor. The screen displays elegant, minimalist line charts in dusty blue and muted terracotta against a warm white background. The interface design reflects a high-end editorial aesthetic with ample whitespace, refined typography, and subtle shadows. The lighting is soft and professional, capturing a modern analyst's desk at dawn." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHb-JVqYfSfMbKRMkmXPcUi2qivwBiEWBeLpxS8DND_JAXG0Mzwrlq4NlzmDvhCxP935a7orQAer_pUXK2vVsj60m5pDXCN9QV06YYUjmtqwr6aIbv_3Y4WRBugC3dQxfgIuyPIkkkvdiQNl-UxdEQTTUceS-3I82EYum9w7mbVs8meAb6BVYMFOpklhbay6r3sHYZBDRNR8Ssb3-cAgEOStR74uo6XqRwj-RxGD3S-EPwmFMEz6PswldOp4NwEzavIZKgMiEdOQg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-transparent flex flex-col justify-end p-lg">
+<h3 class="text-white text-h2 font-h2">Visualizing Trends</h3>
+<p class="text-white/80 font-body-sm text-body-sm max-w-md">Learn how to create impactful narratives using our proprietary 'Story-First' visualization component library.</p>
+</div>
+</div>
+</section>
+<!-- Prompting Best Practices Table -->
+<section class="mb-xxl">
+<div class="flex items-center justify-between mb-lg">
+<div>
+<h3 class="text-h2 font-h2 text-on-surface">Prompting Best Practices</h3>
+<p class="text-stone-500 font-body-sm text-body-sm mt-1">Refine your interaction with InSight's AI core for more accurate synthesis.</p>
+</div>
+<button class="px-6 py-2 border border-[#E2DDD5] rounded-lg text-on-surface font-semibold text-body-sm hover:bg-stone-50 transition-colors">Download Guide</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl border border-[#E2DDD5] overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-50/50 border-b border-[#E2DDD5]">
+<th class="px-lg py-4 text-label-caps font-label-caps text-tertiary">Interaction Type</th>
+<th class="px-lg py-4 text-label-caps font-label-caps text-tertiary">Recommended Syntax</th>
+<th class="px-lg py-4 text-label-caps font-label-caps text-tertiary">Expected Outcome</th>
+<th class="px-lg py-4 text-label-caps font-label-caps text-tertiary">Complexity</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2DDD5]">
+<tr class="hover:bg-blue-50/10 transition-colors">
+<td class="px-lg py-5 font-medium text-on-surface font-body-md text-body-md">Trend Discovery</td>
+<td class="px-lg py-5 font-mono text-body-sm text-primary">"Compare [Metric A] vs [Metric B] over [Time]"</td>
+<td class="px-lg py-5 text-stone-500 font-body-sm text-body-sm">Dual-axis comparative line chart with growth markers.</td>
+<td class="px-lg py-5"><span class="px-2 py-1 bg-green-50 text-green-700 text-[10px] rounded font-bold uppercase tracking-wider">Simple</span></td>
+</tr>
+<tr class="hover:bg-blue-50/10 transition-colors">
+<td class="px-lg py-5 font-medium text-on-surface font-body-md text-body-md">Sentiment Audit</td>
+<td class="px-lg py-5 font-mono text-body-sm text-primary">"Analyze tonal shifts in [Channel] post [Event]"</td>
+<td class="px-lg py-5 text-stone-500 font-body-sm text-body-sm">Word cloud and sentiment velocity heat map.</td>
+<td class="px-lg py-5"><span class="px-2 py-1 bg-orange-50 text-orange-700 text-[10px] rounded font-bold uppercase tracking-wider">Moderate</span></td>
+</tr>
+<tr class="hover:bg-blue-50/10 transition-colors">
+<td class="px-lg py-5 font-medium text-on-surface font-body-md text-body-md">Predictive Modeling</td>
+<td class="px-lg py-5 font-mono text-body-sm text-primary">"Forecast [Goal] based on [Variable] weight [X%]"</td>
+<td class="px-lg py-5 text-stone-500 font-body-sm text-body-sm">Monte Carlo simulation with confidence intervals.</td>
+<td class="px-lg py-5"><span class="px-2 py-1 bg-red-50 text-red-700 text-[10px] rounded font-bold uppercase tracking-wider">Advanced</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Support Footer Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xxl">
+<div class="p-lg bg-surface-container-low rounded-xl border border-[#E2DDD5] text-center">
+<span class="material-symbols-outlined text-[#7B9BBF] mb-sm" style="font-size: 32px;">forum</span>
+<h4 class="font-h3 text-h3 mb-xs">Community Forum</h4>
+<p class="text-stone-500 font-body-sm text-body-sm mb-md">Join 5,000+ analysts discussing best practices.</p>
+<a class="text-[#7B9BBF] font-bold text-body-sm hover:underline" href="#">Browse discussions</a>
+</div>
+<div class="p-lg bg-surface-container-low rounded-xl border border-[#E2DDD5] text-center">
+<span class="material-symbols-outlined text-[#7B9BBF] mb-sm" style="font-size: 32px;">videocam</span>
+<h4 class="font-h3 text-h3 mb-xs">Video Tutorials</h4>
+<p class="text-stone-500 font-body-sm text-body-sm mb-md">Step-by-step guides for visual learners.</p>
+<a class="text-[#7B9BBF] font-bold text-body-sm hover:underline" href="#">Watch now</a>
+</div>
+<div class="p-lg bg-surface-container-low rounded-xl border border-[#E2DDD5] text-center">
+<span class="material-symbols-outlined text-[#7B9BBF] mb-sm" style="font-size: 32px;">mail</span>
+<h4 class="font-h3 text-h3 mb-xs">Direct Support</h4>
+<p class="text-stone-500 font-body-sm text-body-sm mb-md">Our team typically responds within 2 hours.</p>
+<a class="text-[#7B9BBF] font-bold text-body-sm hover:underline" href="#">Open a ticket</a>
+</div>
+</section>
+</div>
+</main>
+</body></html>

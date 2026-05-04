@@ -1,0 +1,49 @@
+[
+  {
+    "role": "user",
+    "content": "Summarise this dataset for me"
+  },
+  {
+    "role": "assistant",
+    "content": "This dataset contains 100 UK company records spanning from 1981 to 2025, with 84 active companies (84%) and 16 dissolved (16%). Almost all companies are limited liability companies (98 LTD), with the majority being unique entities by company number and name.",
+    "stats": [
+      {
+        "label": "Total Records",
+        "value": "100",
+        "sub": "UK company registrations"
+      },
+      {
+        "label": "Active Companies",
+        "value": "84 (84%)",
+        "sub": "16 dissolved"
+      },
+      {
+        "label": "Company Type",
+        "value": "98% Limited",
+        "sub": "2 alternative structures"
+      },
+      {
+        "label": "Time Span",
+        "value": "44 years",
+        "sub": "1981 to 2025"
+      }
+    ],
+    "chart": {
+      "type": "doughnut",
+      "labels": [
+        "Active",
+        "Dissolved"
+      ],
+      "values": [
+        84,
+        16
+      ],
+      "title": "Company Status Distribution"
+    },
+    "followups": [
+      "Which company names appear multiple times, and what are the differences between their records (e.g., different company numbers, statuses)?",
+      "What is the distribution of company dissolutions over time, and has the rate of dissolution changed in recent years?",
+      "Are active companies incorporated more recently than dissolved ones, and what is the average age of each status group?"
+    ]
+  }
+]

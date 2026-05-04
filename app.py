@@ -23,182 +23,239 @@ st.markdown(
 st.markdown("""
 <style>
 
-/* ── Font ───────────────────────────────────────────────────────── */
+/* ── Font ──────────────────────────────────────────────────────────── */
 * {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
+/* CRITICAL: Restore Material Symbols icon font.
+   Streamlit renders all Material icons as spans with data-testid="stIconMaterial".
+   The wildcard font rule above breaks them without this specific override. */
+[data-testid="stIconMaterial"],
+.material-symbols-rounded,
+[class*="material-symbols"] {
+    font-family: 'Material Symbols Rounded' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    -webkit-font-feature-settings: 'liga' !important;
+    font-feature-settings: 'liga' !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
 /* ── App background ─────────────────────────────────────────────── */
 .stApp, [data-testid="stAppViewContainer"] {
-    background-color: #FAFAF8 !important;
+    background-color: #FFFFFF !important;
 }
 [data-testid="stMain"] {
-    background-color: #FAFAF8 !important;
+    background-color: #FFFFFF !important;
 }
 .main .block-container, [data-testid="stMainBlockContainer"] {
-    padding-top: 2.25rem !important;
-    padding-bottom: 4rem !important;
-    max-width: 1080px !important;
+    padding-top: 2rem !important;
+    padding-bottom: 5rem !important;
+    max-width: 1100px !important;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────────── */
+/* ── Sidebar ──────────────────────────────────────────────────────── */
 [data-testid="stSidebar"] {
-    background-color: #F0EFEC !important;
-    border-right: 1px solid #E5E4E0 !important;
+    background-color: #F7F7F5 !important;
+    border-right: 1px solid #E8E7E3 !important;
 }
 [data-testid="stSidebar"] > div > div > div {
-    background-color: #F0EFEC !important;
+    background-color: #F7F7F5 !important;
 }
 
-/* ── Typography ─────────────────────────────────────────────────── */
+/* ── Typography ───────────────────────────────────────────────────── */
 h1, h2, h3, h4 {
-    letter-spacing: -0.025em !important;
-    color: #1A1917 !important;
+    letter-spacing: -0.03em !important;
+    color: #18181B !important;
 }
-h1 { font-weight: 700 !important; }
-h2 { font-weight: 600 !important; }
-h3, h4 { font-weight: 600 !important; font-size: 1rem !important; }
-p { color: #3D3C3A !important; line-height: 1.65 !important; }
+h1 { font-size: 2.5rem !important; font-weight: 700 !important; }
+h2 { font-size: 1.5rem !important; font-weight: 600 !important; }
+h3, h4 { font-size: 1rem !important; font-weight: 600 !important; }
+p { color: #52525B !important; line-height: 1.7 !important; }
+label { color: #52525B !important; font-size: 0.875rem !important; }
 
-/* ── Tabs ────────────────────────────────────────────────────────── */
+/* ── Tabs ─────────────────────────────────────────────────────────── */
 [data-testid="stTabs"] [role="tablist"] {
-    border-bottom: 2px solid #E5E4E0 !important;
+    border-bottom: 1px solid #E8E7E3 !important;
     background: transparent !important;
     gap: 0 !important;
 }
 [data-testid="stTabs"] [role="tab"] {
     border-radius: 0 !important;
     border-bottom: 2px solid transparent !important;
-    margin-bottom: -2px !important;
+    margin-bottom: -1px !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: #6B6A67 !important;
-    padding: 0.625rem 1.125rem !important;
+    color: #71717A !important;
+    padding: 0.75rem 1.25rem !important;
     background: transparent !important;
+    transition: color 0.15s !important;
 }
 [data-testid="stTabs"] [role="tab"][aria-selected="true"] {
-    border-bottom: 2px solid #3B5BDB !important;
-    color: #1A1917 !important;
+    border-bottom: 2px solid #2563EB !important;
+    color: #18181B !important;
     font-weight: 600 !important;
     background: transparent !important;
 }
+[data-testid="stTabs"] [role="tab"]:hover:not([aria-selected="true"]) {
+    color: #3F3F46 !important;
+}
 
-/* ── Buttons ─────────────────────────────────────────────────────── */
+/* ── Buttons ──────────────────────────────────────────────────────── */
 .stButton > button,
 .stDownloadButton > button {
-    background: white !important;
-    border: 1px solid #E0DED9 !important;
-    border-radius: 7px !important;
-    color: #1A1917 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E1DD !important;
+    border-radius: 8px !important;
+    color: #18181B !important;
     font-size: 0.8125rem !important;
     font-weight: 500 !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07) !important;
-    transition: background 0.12s, border-color 0.12s, box-shadow 0.12s !important;
+    letter-spacing: -0.01em !important;
+    padding: 0.375rem 0.875rem !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s !important;
 }
 .stButton > button:hover,
 .stDownloadButton > button:hover {
-    background: #F5F4F0 !important;
-    border-color: #C8C7C2 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.09) !important;
+    background: #F4F4F5 !important;
+    border-color: #D1D0CC !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+}
+.stButton > button:active,
+.stDownloadButton > button:active {
+    background: #EBEBEB !important;
+    box-shadow: none !important;
 }
 
-/* ── Metric cards ────────────────────────────────────────────────── */
+/* ── Metric cards ─────────────────────────────────────────────────── */
 [data-testid="metric-container"] {
-    background: white !important;
-    border: 1px solid #E5E4E0 !important;
-    border-radius: 10px !important;
-    padding: 1.125rem 1.25rem !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+    background: #FAFAF9 !important;
+    border: 1px solid #E8E7E3 !important;
+    border-radius: 12px !important;
+    padding: 1.25rem 1.5rem !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
 }
 [data-testid="stMetricValue"] {
-    font-size: 1.5rem !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.02em !important;
-    color: #1A1917 !important;
+    font-size: 1.625rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    color: #18181B !important;
 }
 [data-testid="stMetricLabel"] {
     font-size: 0.6875rem !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
-    color: #9B9A97 !important;
+    letter-spacing: 0.07em !important;
+    color: #A1A1AA !important;
 }
 
 /* ── Bordered containers (Profile cards) ─────────────────────────── */
 [data-testid="stVerticalBlockBorderWrapper"] {
-    background: white !important;
-    border-color: #E5E4E0 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+    background: #FAFAF9 !important;
+    border-color: #E8E7E3 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
 }
 
-/* ── Chat messages ───────────────────────────────────────────────── */
+/* ── Chat messages ────────────────────────────────────────────────── */
 [data-testid="stChatMessage"] {
-    background: white !important;
-    border: 1px solid #E5E4E0 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
-    margin-bottom: 0.625rem !important;
+    background: #FAFAF9 !important;
+    border: 1px solid #E8E7E3 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+    margin-bottom: 0.75rem !important;
 }
 [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
-    background: #EEF2FF !important;
-    border-color: #C7D2FE !important;
+    background: #EFF6FF !important;
+    border-color: #BFDBFE !important;
 }
 
-/* ── Chat input ──────────────────────────────────────────────────── */
+/* ── Chat input ───────────────────────────────────────────────────── */
 [data-testid="stChatInputContainer"] {
-    border-radius: 10px !important;
-    border: 1px solid #D9D8D4 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07) !important;
-    background: white !important;
+    border-radius: 12px !important;
+    border: 1.5px solid #E2E1DD !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+    background: #FFFFFF !important;
 }
 [data-testid="stChatInputContainer"]:focus-within {
-    border-color: #3B5BDB !important;
-    box-shadow: 0 0 0 3px rgba(59,91,219,0.1), 0 2px 8px rgba(0,0,0,0.07) !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.08), 0 4px 12px rgba(0,0,0,0.06) !important;
 }
 
-/* ── Text / select inputs ────────────────────────────────────────── */
+/* ── Text / select inputs ─────────────────────────────────────────── */
 .stTextInput input, .stTextArea textarea {
-    background: white !important;
-    border: 1px solid #E5E4E0 !important;
-    border-radius: 7px !important;
-    color: #1A1917 !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E2E1DD !important;
+    border-radius: 8px !important;
+    color: #18181B !important;
+    font-size: 0.875rem !important;
 }
 .stTextInput input:focus, .stTextArea textarea:focus {
-    border-color: #3B5BDB !important;
-    box-shadow: 0 0 0 3px rgba(59,91,219,0.1) !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.08) !important;
 }
 
-/* ── Expanders ───────────────────────────────────────────────────── */
+/* ── Expanders ────────────────────────────────────────────────────── */
 [data-testid="stExpander"] {
-    background: white !important;
-    border: 1px solid #E5E4E0 !important;
-    border-radius: 8px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E8E7E3 !important;
+    border-radius: 10px !important;
     overflow: hidden !important;
 }
 
-/* ── Dividers ────────────────────────────────────────────────────── */
-hr { border-color: #E5E4E0 !important; }
+/* ── Dividers ─────────────────────────────────────────────────────── */
+hr { border-color: #E8E7E3 !important; }
 
-/* ── Captions ────────────────────────────────────────────────────── */
-small, .stCaption {
+/* ── Captions / small text ────────────────────────────────────────── */
+small, .stCaption, [data-testid="stCaptionContainer"] {
     font-size: 0.8125rem !important;
-    color: #9B9A97 !important;
+    color: #A1A1AA !important;
+    line-height: 1.5 !important;
 }
 
-/* ── File uploader ───────────────────────────────────────────────── */
+/* ── File uploader ────────────────────────────────────────────────── */
 [data-testid="stFileUploaderDropzone"] {
-    border-radius: 8px !important;
-    border: 1.5px dashed #D0CEC9 !important;
-    background: white !important;
+    border-radius: 10px !important;
+    border: 1.5px dashed #D4D2CE !important;
+    background: #FAFAF9 !important;
+    transition: border-color 0.15s, background 0.15s !important;
+}
+[data-testid="stFileUploaderDropzone"]:hover {
+    border-color: #2563EB !important;
+    background: #EFF6FF !important;
 }
 
-/* ── Dataframe ───────────────────────────────────────────────────── */
+/* ── Dataframe ────────────────────────────────────────────────────── */
 [data-testid="stDataFrameResizable"] {
-    border: 1px solid #E5E4E0 !important;
-    border-radius: 8px !important;
+    border: 1px solid #E8E7E3 !important;
+    border-radius: 10px !important;
     overflow: hidden !important;
 }
+
+/* ── Selectbox ────────────────────────────────────────────────────── */
+[data-testid="stSelectbox"] > div > div {
+    background: #FFFFFF !important;
+    border: 1.5px solid #E2E1DD !important;
+    border-radius: 8px !important;
+}
+
+/* ── Alerts ───────────────────────────────────────────────────────── */
+[data-testid="stAlert"] {
+    border-radius: 10px !important;
+    font-size: 0.875rem !important;
+}
+
+/* ── Radio labels ─────────────────────────────────────────────────── */
+[data-testid="stRadio"] label {
+    font-size: 0.875rem !important;
+    color: #3F3F46 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -246,15 +303,24 @@ def _schema() -> str:
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(
-        '<p style="font-size:1.0625rem;font-weight:700;letter-spacing:-0.03em;'
-        'color:#1A1917;margin-bottom:0.125rem;">InSight</p>'
-        '<p style="font-size:0.75rem;color:#9B9A97;margin-top:0;margin-bottom:0;">AI-powered data analysis</p>',
+        '<div style="padding:0.25rem 0 0.75rem 0;">'
+        '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">'
+        '<div style="width:28px;height:28px;background:linear-gradient(135deg,#2563EB 0%,#7C3AED 100%);'
+        'border-radius:7px;flex-shrink:0;"></div>'
+        '<span style="font-size:1.125rem;font-weight:700;letter-spacing:-0.03em;color:#18181B;">InSight</span>'
+        '</div>'
+        '<p style="font-size:0.75rem;color:#A1A1AA;margin:0;line-height:1.4;">AI-powered data analysis</p>'
+        '</div>',
         unsafe_allow_html=True,
     )
     st.divider()
 
     # -- Data source --
-    st.markdown("**Add data**")
+    st.markdown(
+        '<p style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;'
+        'letter-spacing:0.07em;color:#A1A1AA;margin-bottom:0.5rem;">Data source</p>',
+        unsafe_allow_html=True,
+    )
     source = st.radio(
         "source",
         ["Upload file(s)", "Google Sheets", "SQL Database", "Demo: Companies House"],
@@ -305,7 +371,11 @@ with st.sidebar:
     # -- Loaded datasets --
     if st.session_state.datasets:
         st.divider()
-        st.markdown("**Loaded datasets**")
+        st.markdown(
+            '<p style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;'
+            'letter-spacing:0.07em;color:#A1A1AA;margin-bottom:0.5rem;">Loaded datasets</p>',
+            unsafe_allow_html=True,
+        )
         for key in list(st.session_state.datasets.keys()):
             col_a, col_b = st.columns([4, 1])
             is_active = key == st.session_state.active_key
@@ -358,7 +428,11 @@ with st.sidebar:
 
     # -- Workspaces --
     st.divider()
-    st.markdown("**Workspaces**")
+    st.markdown(
+        '<p style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;'
+        'letter-spacing:0.07em;color:#A1A1AA;margin-bottom:0.5rem;">Workspaces</p>',
+        unsafe_allow_html=True,
+    )
     ws_name = st.text_input("Save as", placeholder="my-analysis", label_visibility="collapsed")
     if st.button("Save workspace", use_container_width=True) and ws_name and st.session_state.datasets:
         save_workspace(ws_name, st.session_state.datasets, st.session_state.messages)
@@ -426,19 +500,51 @@ df = _active_df()
 
 if df is None:
     st.markdown(
-        '<h1 style="font-size:2.25rem;font-weight:700;letter-spacing:-0.04em;'
-        'color:#1A1917;margin-bottom:0.375rem;">InSight</h1>'
-        '<p style="font-size:1.0625rem;color:#6B6A67;font-weight:400;margin-bottom:2rem;">'
-        'Ask questions about your data in plain English.</p>',
+        '<div style="padding:2.5rem 0 2rem 0;">'
+        '<div style="display:flex;align-items:center;gap:0.875rem;margin-bottom:1rem;">'
+        '<div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB 0%,#7C3AED 100%);'
+        'border-radius:12px;flex-shrink:0;box-shadow:0 4px 14px rgba(37,99,235,0.25);"></div>'
+        '<h1 style="font-size:2.5rem;font-weight:700;letter-spacing:-0.04em;color:#18181B;margin:0;">InSight</h1>'
+        '</div>'
+        '<p style="font-size:1.125rem;color:#71717A;font-weight:400;margin:0;line-height:1.6;">'
+        'Ask questions about your data in plain English.</p>'
+        '</div>',
         unsafe_allow_html=True,
     )
     ca, cb, cc = st.columns(3)
     with ca:
-        st.info("**Load data** — upload CSV or Excel files, connect to a SQL database, or pull from Google Sheets using the sidebar.")
+        st.markdown(
+            '<div style="background:#FAFAF9;border:1px solid #E8E7E3;border-radius:12px;'
+            'padding:1.25rem 1.5rem;height:100%;">'
+            '<p style="font-size:0.8125rem;font-weight:600;color:#18181B;margin:0 0 0.375rem 0;'
+            'letter-spacing:-0.01em;">Load data</p>'
+            '<p style="font-size:0.8125rem;color:#71717A;margin:0;line-height:1.6;">'
+            'Upload CSV or Excel files, connect to a SQL database, or pull from Google Sheets using the sidebar.</p>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
     with cb:
-        st.info("**Ask anything** — InSight runs real Python code on your full dataset to give exact answers, metrics, and charts.")
+        st.markdown(
+            '<div style="background:#FAFAF9;border:1px solid #E8E7E3;border-radius:12px;'
+            'padding:1.25rem 1.5rem;height:100%;">'
+            '<p style="font-size:0.8125rem;font-weight:600;color:#18181B;margin:0 0 0.375rem 0;'
+            'letter-spacing:-0.01em;">Ask anything</p>'
+            '<p style="font-size:0.8125rem;color:#71717A;margin:0;line-height:1.6;">'
+            'InSight runs real Python code on your full dataset to give exact answers, metrics, and charts.</p>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
     with cc:
-        st.info("**Explore** — browse your data in the Data tab, see auto-generated column statistics in Profile, or save your work as a Workspace.")
+        st.markdown(
+            '<div style="background:#FAFAF9;border:1px solid #E8E7E3;border-radius:12px;'
+            'padding:1.25rem 1.5rem;height:100%;">'
+            '<p style="font-size:0.8125rem;font-weight:600;color:#18181B;margin:0 0 0.375rem 0;'
+            'letter-spacing:-0.01em;">Explore</p>'
+            '<p style="font-size:0.8125rem;color:#71717A;margin:0;line-height:1.6;">'
+            'Browse your data, see auto-generated column statistics in Profile, or save your work as a Workspace.</p>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
 
 else:
     for level, msg in get_quality_warnings(df):

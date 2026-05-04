@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {tertiary: "#615e58", "surface-bright": "#fef9f1", "on-tertiary-fixed-variant": "#494741", "on-surface": "#1d1c17", "surface-container-high": "#ece8e0", "inverse-surface": "#32302b", "on-secondary-container": "#6e2a00", "tertiary-fixed": "#e7e2da", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#7a3000", "on-tertiary-container": "#32302b", surface: "#fef9f1", "on-primary-fixed": "#001d34", "surface-dim": "#ded9d2", primary: "#416182", "secondary-fixed-dim": "#ffb693", "on-tertiary": "#ffffff", "surface-tint": "#416182", "on-secondary-fixed": "#351000", outline: "#73777e", "primary-container": "#7b9bbf", "on-surface-variant": "#43474d", "on-secondary": "#ffffff", "secondary-container": "#fd8e55", "on-background": "#1d1c17", "on-primary": "#ffffff", "surface-container-highest": "#e7e2da", "surface-container-low": "#f8f3eb", "on-error": "#ffffff", "on-primary-container": "#0c3251", "inverse-primary": "#a9c9ef", "on-tertiary-fixed": "#1d1b17", "secondary-fixed": "#ffdbcc", "tertiary-container": "#9c9891", background: "#fef9f1", secondary: "#9c440f", "primary-fixed": "#d0e4ff", "surface-container-lowest": "#ffffff", error: "#ba1a1a", "tertiary-fixed-dim": "#cac6be", "surface-container": "#f2ede5", "on-primary-fixed-variant": "#284969", "primary-fixed-dim": "#a9c9ef", "surface-variant": "#e7e2da", "inverse-on-surface": "#f5f0e8", "outline-variant": "#c3c7ce", "error-container": "#ffdad6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "24px", lg: "24px", unit: "8px", md: "16px", sm: "8px", xxl: "64px", "container-max": "1440px", xs: "4px", xl: "40px"}, fontFamily: {h2: ["Metropolis"], "body-lg": ["Inter"], h1: ["Metropolis"], h3: ["Metropolis"], "label-caps": ["Inter"], display: ["Metropolis"], "body-sm": ["Inter"], "data-tabular": ["Inter"], "body-md": ["Inter"], headline: ["Metropolis"], body: ["Inter"], label: ["Inter"]}, fontSize: {h2: ["24px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500"}], "body-lg": ["18px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], h3: ["20px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "500"}], "label-caps": ["12px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], "data-tabular": ["14px", {lineHeight: "1", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E2DDD5;
+            border-radius: 10px;
+        }
+        .editorial-shadow {
+            box-shadow: 0 4px 20px -2px rgba(123, 155, 191, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-hidden">
+<!-- SideNavBar (Authority Source: JSON) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] border-r bg-stone-50 dark:bg-stone-950 border-stone-200 dark:border-stone-800 flex flex-col h-full py-8 px-6 z-50">
+<div class="mb-10">
+<h1 class="text-orange-700 dark:text-orange-500 font-serif font-bold text-2xl">InSight</h1>
+<p class="text-stone-500 text-sm mt-1">Editorial Analytics</p>
+</div>
+<button class="mb-8 w-full flex items-center justify-center gap-2 bg-primary-container text-white py-3 px-4 rounded-xl font-medium transition-transform active:scale-[0.98] hover:opacity-90">
+<span class="material-symbols-outlined">add</span>
+            New Analysis
+        </button>
+<nav class="flex-1 space-y-2">
+<!-- Active Item: Models -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-200 scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-200 scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">database</span>
+<span>Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#7B9BBF] font-semibold border-r-2 border-[#7B9BBF] bg-blue-50/50 dark:bg-blue-900/10 transition-colors duration-200 scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span>Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-200 scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Archives</span>
+</a>
+</nav>
+<div class="pt-8 border-t border-stone-200 dark:border-stone-800 space-y-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-stone-500 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-stone-500 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<div class="mt-6 flex items-center gap-3 px-4">
+<img alt="User profile" class="w-8 h-8 rounded-full border border-stone-200" data-alt="A professional headshot of a refined editor in a soft-lit creative studio space. The lighting is warm and natural, casting soft shadows that emphasize a thoughtful, analytical expression. The overall style is clean, modern, and high-end light-mode editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDebjBGoLgy4nnFR1fg1u7HmRN-c51nrgkQ-wM4qlFkJorfbKWh_AD52E265GxI-BUKswgErf7kO2PXQ3E_xSLYv098162CEquFI7CvIcDDJF1loXYOZXA7euP4oQ7C81QrJLpFxWhBw5-TM7IbjUWEMw6kFkVOJ7itd0NbK5MyQR3JMAryex33gcvsLb8jBZ5SdlIMPvBscQiVuEOGO_vN9mW05KMoqZagSKe64TeaU_TdePhkLzvcqTqn1zLDySX2-sIhpd1Fsyw"/>
+<div>
+<p class="text-xs font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-stone-400">Senior Analyst</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar (Authority Source: JSON) -->
+<header class="sticky top-0 z-40 w-full border-b bg-white/80 dark:bg-stone-900/80 backdrop-blur-md border-stone-200 dark:border-stone-800 shadow-sm shadow-stone-200/50 dark:shadow-none">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto w-full font-sans text-sm font-medium">
+<div class="flex items-center gap-8">
+<span class="text-stone-900 dark:text-stone-100 font-bold tracking-tight text-lg">Workspace</span>
+<nav class="flex gap-6 items-center">
+<a class="text-[#7B9BBF] border-b-2 border-[#7B9BBF] pb-4 transition-all" href="#">Drafts</a>
+<a class="text-stone-500 dark:text-stone-400 pb-4 hover:text-[#7B9BBF] transition-all" href="#">Published</a>
+<a class="text-stone-500 dark:text-stone-400 pb-4 hover:text-[#7B9BBF] transition-all" href="#">Scheduled</a>
+<a class="text-stone-500 dark:text-stone-400 pb-4 hover:text-[#7B9BBF] transition-all" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-stone-500 hover:text-stone-900 transition-colors">notifications_none</button>
+<button class="material-symbols-outlined text-stone-500 hover:text-stone-900 transition-colors">account_circle</button>
+</div>
+</div>
+</header>
+<!-- Dynamic Content Area -->
+<div class="flex-1 overflow-y-auto px-xl py-xl max-w-[1440px] mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-xl flex justify-between items-end">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Chat Analysis</h2>
+<p class="text-stone-500 mt-2 font-body-md">Conversational intelligence and revenue mapping</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-stone-200 rounded-lg text-body-sm font-medium hover:bg-stone-50 transition-colors">Export Report</button>
+<button class="px-4 py-2 bg-primary-container text-white rounded-lg text-body-sm font-medium hover:opacity-90 transition-opacity">Share Context</button>
+</div>
+</div>
+<!-- Dashboard Layout: Bento Grid Style -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Metrics Section -->
+<div class="col-span-12 grid grid-cols-3 gap-gutter mb-md">
+<div class="bg-white p-lg rounded-xl editorial-shadow border border-stone-100 flex flex-col justify-between">
+<span class="text-label-caps font-label-caps text-stone-400 uppercase">Total Revenue</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-h1 font-h1 text-on-surface">$1.2M</span>
+<span class="text-body-sm text-green-600 font-medium">+14.2%</span>
+</div>
+</div>
+<div class="bg-white p-lg rounded-xl editorial-shadow border border-stone-100 flex flex-col justify-between">
+<span class="text-label-caps font-label-caps text-stone-400 uppercase">Growth %</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-h1 font-h1 text-on-surface">22.4%</span>
+<span class="text-body-sm text-green-600 font-medium">+3.1%</span>
+</div>
+</div>
+<div class="bg-white p-lg rounded-xl editorial-shadow border border-stone-100 flex flex-col justify-between">
+<span class="text-label-caps font-label-caps text-stone-400 uppercase">Avg Deal Size</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-h1 font-h1 text-on-surface">$48.5K</span>
+<span class="text-body-sm text-stone-400 font-medium">Flat</span>
+</div>
+</div>
+</div>
+<!-- Chat Interface Panel -->
+<div class="col-span-12 lg:col-span-5 h-[600px] flex flex-col bg-surface-container-low rounded-xl border border-stone-200 overflow-hidden">
+<div class="p-md border-b border-stone-200 bg-white/50 backdrop-blur flex justify-between items-center">
+<span class="font-h3 text-body-md font-semibold text-on-surface">Insight AI</span>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer">more_horiz</span>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<!-- User Message -->
+<div class="flex justify-end">
+<div class="max-w-[80%] bg-primary-container text-white p-md rounded-2xl rounded-tr-xs">
+<p class="text-body-sm">Can you analyze the correlation between our ad spend and the growth in average deal size over the last quarter?</p>
+</div>
+</div>
+<!-- AI Message -->
+<div class="flex justify-start">
+<div class="max-w-[85%] bg-white p-md rounded-2xl rounded-tl-xs editorial-shadow border border-stone-100">
+<p class="text-body-sm text-on-surface-variant leading-relaxed">Based on the recent data sources, there's a 0.72 correlation coefficient between video ad placement and deal size. High-tier prospects are engaging more frequently with analytical content series.</p>
+<div class="mt-md pt-md border-t border-stone-100 flex gap-2 overflow-x-auto">
+<span class="px-2 py-1 bg-stone-50 border border-stone-100 rounded text-[10px] text-stone-500">Q3_Revenue_Data.csv</span>
+<span class="px-2 py-1 bg-stone-50 border border-stone-100 rounded text-[10px] text-stone-500">Ad_Spend_Report.pdf</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-md bg-white border-t border-stone-200">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border-stone-200 rounded-xl px-md py-3 focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all pr-xl text-body-sm" placeholder="Ask about growth trends..." type="text"/>
+<button class="absolute right-3 material-symbols-outlined text-primary-container">send</button>
+</div>
+</div>
+</div>
+<!-- Visualization Panel -->
+<div class="col-span-12 lg:col-span-7 h-[600px] flex flex-col bg-white rounded-xl border border-stone-200 editorial-shadow overflow-hidden">
+<div class="p-md border-b border-stone-100 flex justify-between items-center">
+<span class="font-h3 text-body-md font-semibold text-on-surface">Revenue Growth Projection</span>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-stone-100 material-symbols-outlined text-stone-400">fullscreen</button>
+<button class="p-1 rounded hover:bg-stone-100 material-symbols-outlined text-stone-400">download</button>
+</div>
+</div>
+<div class="flex-1 p-lg relative overflow-hidden flex items-center justify-center">
+<!-- Chart Representation -->
+<div class="w-full h-full flex flex-col justify-end">
+<div class="flex-1 flex items-end gap-1 px-4 relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-4 pointer-events-none opacity-20">
+<div class="border-t border-stone-400 w-full h-px"></div>
+<div class="border-t border-stone-400 w-full h-px"></div>
+<div class="border-t border-stone-400 w-full h-px"></div>
+<div class="border-t border-stone-400 w-full h-px"></div>
+</div>
+<!-- Visual Chart Graphic -->
+<div class="relative w-full h-[80%]">
+<svg class="w-full h-full" viewbox="0 0 800 400">
+<path d="M0,350 Q100,300 200,320 T400,200 T600,150 T800,50" fill="none" stroke="#7B9BBF" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0,350 Q100,300 200,320 T400,200 T600,150 T800,50 L800,400 L0,400 Z" fill="url(#grad1)" opacity="0.1"></path>
+<circle cx="400" cy="200" fill="#7B9BBF" r="6"></circle>
+<circle cx="800" cy="50" fill="#9c440f" r="6"></circle>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#7B9BBF;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#7B9BBF;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<div class="flex justify-between px-md pt-md text-label-caps text-stone-400 uppercase">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+</div>
+</div>
+</div>
+<div class="p-md border-t border-stone-100 flex gap-gutter bg-stone-50/50">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">Historical Revenue</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">AI Forecasted Target</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Details -->
+<div class="mt-xl grid grid-cols-12 gap-gutter opacity-60">
+<div class="col-span-12 flex justify-between text-body-sm text-stone-500 border-t border-stone-200 pt-md">
+<span>Last updated: Oct 24, 2023 at 14:32:01</span>
+<div class="flex gap-md">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Data Processing Agreement</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Suppressing as per mandate on details/analysis screen if it doesn't align, but adding it for 'Ask New Question' utility if needed) -->
+<!-- FAB Suppressed as per rule: Suppress on Details/Task screens unless perfectly aligned. 'New Analysis' is already in sidebar. -->
+</body></html>
