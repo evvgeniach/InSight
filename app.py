@@ -16,20 +16,28 @@ st.set_page_config(page_title="InSight", layout="wide")
 st.markdown(
     '<link rel="preconnect" href="https://fonts.googleapis.com">'
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-    '<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">',
+    '<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Metropolis:wght@400;500;700&display=swap" rel="stylesheet">'
+    '<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">',
     unsafe_allow_html=True,
 )
 
 st.markdown("""
 <style>
 
-/* ── Font ──────────────────────────────────────────────────────────── */
+/* ── Fonts ─────────────────────────────────────────────────────────── */
 * {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
+h1, h2, h3, h4,
+[data-testid="stMetricValue"] {
+    font-family: 'Metropolis', 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+}
+.insight-logo {
+    font-family: 'Metropolis', 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+}
 
 /* CRITICAL: Restore Material Symbols icon font.
-   Streamlit renders all Material icons as spans with data-testid="stIconMaterial".
+   Streamlit renders all Material icons with data-testid="stIconMaterial".
    The wildcard font rule above breaks them without this specific override. */
 [data-testid="stIconMaterial"],
 .material-symbols-rounded,
@@ -46,214 +54,501 @@ st.markdown("""
     -webkit-font-smoothing: antialiased !important;
 }
 
-/* ── App background ─────────────────────────────────────────────── */
+/* ── Custom scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d9d3c9; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #c4beb4; }
+
+/* ── App background ─────────────────────────────────────────────────── */
 .stApp, [data-testid="stAppViewContainer"] {
-    background-color: #FFFFFF !important;
+    background-color: #fef9f1 !important;
 }
 [data-testid="stMain"] {
-    background-color: #FFFFFF !important;
+    background-color: #fef9f1 !important;
 }
 .main .block-container, [data-testid="stMainBlockContainer"] {
-    padding-top: 2rem !important;
+    padding-top: 0rem !important;
     padding-bottom: 5rem !important;
-    max-width: 1100px !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+.workspace-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #E2DDD5;
+    padding: 1.5rem 0;
+    margin: 0 -1.5rem 1.5rem;
+    width: calc(100% + 3rem);
+}
+.workspace-header__inner {
+    max-width: none;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.workspace-header__title {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1d1c17;
+    font-family: 'Metropolis', serif !important;
+    line-height: 1.05;
+}
+.workspace-header__subtitle {
+    margin: 0.35rem 0 0;
+    color: #616161;
+    font-size: 0.95rem;
+}
+.workspace-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    margin-left: -1.5rem;
+    width: calc(100% + 3rem);
 }
 
-/* ── Sidebar ──────────────────────────────────────────────────────── */
-[data-testid="stSidebar"] {
-    background-color: #F7F7F5 !important;
-    border-right: 1px solid #E8E7E3 !important;
+/* ── Sidebar ─────────────────────────────────────────────────────────── */
+[data-testid="stSidebar"],
+section[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    border-right: 1px solid #E2DDD5 !important;
+    min-width: 340px !important;
+    max-width: 340px !important;
+    width: 340px !important;
 }
+[data-testid="stSidebar"] > div,
+[data-testid="stSidebar"] > div > div,
 [data-testid="stSidebar"] > div > div > div {
-    background-color: #F7F7F5 !important;
+    background-color: #ffffff !important;
 }
 
-/* ── Typography ───────────────────────────────────────────────────── */
+/* ── Typography ──────────────────────────────────────────────────────── */
 h1, h2, h3, h4 {
-    letter-spacing: -0.03em !important;
-    color: #18181B !important;
+    letter-spacing: -0.02em !important;
+    color: #1d1c17 !important;
 }
-h1 { font-size: 2.5rem !important; font-weight: 700 !important; }
-h2 { font-size: 1.5rem !important; font-weight: 600 !important; }
-h3, h4 { font-size: 1rem !important; font-weight: 600 !important; }
-p { color: #52525B !important; line-height: 1.7 !important; }
-label { color: #52525B !important; font-size: 0.875rem !important; }
+h1 { font-size: 2rem !important; font-weight: 600 !important; }
+h2 { font-size: 1.5rem !important; font-weight: 500 !important; }
+h3, h4 { font-size: 1rem !important; font-weight: 500 !important; }
+p { color: #43474d !important; line-height: 1.7 !important; }
+label { color: #6b6869 !important; font-size: 0.875rem !important; }
 
-/* ── Tabs ─────────────────────────────────────────────────────────── */
+/* ── Tabs ────────────────────────────────────────────────────────────── */
 [data-testid="stTabs"] [role="tablist"] {
-    border-bottom: 1px solid #E8E7E3 !important;
-    background: transparent !important;
-    gap: 0 !important;
+    border-bottom: none !important;
+    background: #f8f7f4 !important;
+    border: 1px solid #E2DDD5 !important;
+    border-radius: 999px !important;
+    padding: 0.35rem 0.5rem !important;
+    gap: 0.5rem !important;
 }
 [data-testid="stTabs"] [role="tab"] {
-    border-radius: 0 !important;
-    border-bottom: 2px solid transparent !important;
-    margin-bottom: -1px !important;
+    border-radius: 999px !important;
+    border: 1px solid transparent !important;
+    margin-bottom: 0 !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: #71717A !important;
-    padding: 0.75rem 1.25rem !important;
-    background: transparent !important;
-    transition: color 0.15s !important;
+    color: #9A9590 !important;
+    padding: 0.8rem 1.25rem !important;
+    background: #f8f7f4 !important;
+    transition: all 0.2s !important;
 }
 [data-testid="stTabs"] [role="tab"][aria-selected="true"] {
-    border-bottom: 2px solid #2563EB !important;
-    color: #18181B !important;
+    border-color: #7b9bbf !important;
+    background: #ffffff !important;
+    color: #416182 !important;
     font-weight: 600 !important;
-    background: transparent !important;
+    box-shadow: 0 12px 30px -20px rgba(65,97,130,0.25) !important;
 }
 [data-testid="stTabs"] [role="tab"]:hover:not([aria-selected="true"]) {
-    color: #3F3F46 !important;
+    color: #416182 !important;
+    background: #ffffff !important;
 }
 
-/* ── Buttons ──────────────────────────────────────────────────────── */
+/* ── Radio panel (seamless sidebar, no circles) ──────────────────────── */
+[data-testid="stRadio"] {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+}
+[data-testid="stRadio"] label {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    font-size: 0.875rem !important;
+    color: #43474d !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 8px !important;
+    transition: background 0.15s !important;
+    cursor: pointer !important;
+    gap: 0 !important;
+}
+[data-testid="stRadio"] label:has(input:checked) {
+    background: #edf2f8 !important;
+    color: #416182 !important;
+    font-weight: 500 !important;
+}
+[data-testid="stRadio"] label:hover {
+    background: #f0ede8 !important;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
 .stButton > button,
 .stDownloadButton > button {
-    background: #FFFFFF !important;
-    border: 1px solid #E2E1DD !important;
+    background: #fef9f1 !important;
+    border: 1px solid #E2DDD5 !important;
     border-radius: 8px !important;
-    color: #18181B !important;
+    color: #1d1c17 !important;
     font-size: 0.8125rem !important;
     font-weight: 500 !important;
-    letter-spacing: -0.01em !important;
     padding: 0.375rem 0.875rem !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
-    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s !important;
+    box-shadow: 0 1px 3px rgba(65,97,130,0.06) !important;
+    transition: all 0.2s !important;
 }
 .stButton > button:hover,
 .stDownloadButton > button:hover {
-    background: #F4F4F5 !important;
-    border-color: #D1D0CC !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+    background: #ece7de !important;
+    border-color: #c8c0b5 !important;
+    box-shadow: 0 2px 8px rgba(123,155,191,0.1) !important;
 }
 .stButton > button:active,
 .stDownloadButton > button:active {
-    background: #EBEBEB !important;
+    background: #e2ddd5 !important;
+    transform: scale(0.98) !important;
     box-shadow: none !important;
 }
 
-/* ── Metric cards ─────────────────────────────────────────────────── */
+/* ── Metric cards ────────────────────────────────────────────────────── */
 [data-testid="metric-container"] {
-    background: #FAFAF9 !important;
-    border: 1px solid #E8E7E3 !important;
+    background: #ffffff !important;
+    border: 1px solid #e7e2da !important;
     border-radius: 12px !important;
     padding: 1.25rem 1.5rem !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+    box-shadow: 0 4px 20px -2px rgba(123,155,191,0.07) !important;
 }
 [data-testid="stMetricValue"] {
-    font-size: 1.625rem !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.025em !important;
-    color: #18181B !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    color: #1d1c17 !important;
 }
 [data-testid="stMetricLabel"] {
     font-size: 0.6875rem !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.07em !important;
-    color: #A1A1AA !important;
+    letter-spacing: 0.05em !important;
+    color: #9A9590 !important;
 }
 
-/* ── Bordered containers (Profile cards) ─────────────────────────── */
+/* ── Bordered containers (Profile cards) ────────────────────────────── */
 [data-testid="stVerticalBlockBorderWrapper"] {
-    background: #FAFAF9 !important;
-    border-color: #E8E7E3 !important;
+    background: #ffffff !important;
+    border-color: #E2DDD5 !important;
     border-radius: 12px !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+    box-shadow: 0 4px 20px -2px rgba(123,155,191,0.06) !important;
 }
 
-/* ── Chat messages ────────────────────────────────────────────────── */
+/* ── Chat messages ───────────────────────────────────────────────────── */
 [data-testid="stChatMessage"] {
-    background: #FAFAF9 !important;
-    border: 1px solid #E8E7E3 !important;
-    border-radius: 12px !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+    background: #ffffff !important;
+    border: 1px solid #e7e2da !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px -2px rgba(123,155,191,0.06) !important;
     margin-bottom: 0.75rem !important;
 }
 [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
-    background: #EFF6FF !important;
-    border-color: #BFDBFE !important;
+    background: #edf2f8 !important;
+    border-color: #b4ccdf !important;
 }
 
-/* ── Chat input ───────────────────────────────────────────────────── */
+/* ── Chat input ──────────────────────────────────────────────────────── */
 [data-testid="stChatInputContainer"] {
     border-radius: 12px !important;
-    border: 1.5px solid #E2E1DD !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
-    background: #FFFFFF !important;
+    border: 1.5px solid #E2DDD5 !important;
+    box-shadow: 0 4px 20px -2px rgba(123,155,191,0.08) !important;
+    background: #ffffff !important;
 }
 [data-testid="stChatInputContainer"]:focus-within {
-    border-color: #2563EB !important;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.08), 0 4px 12px rgba(0,0,0,0.06) !important;
+    border-color: #7b9bbf !important;
+    box-shadow: 0 0 0 3px rgba(123,155,191,0.18), 0 4px 20px -2px rgba(123,155,191,0.08) !important;
 }
 
-/* ── Text / select inputs ─────────────────────────────────────────── */
+/* ── Text / select inputs ────────────────────────────────────────────── */
 .stTextInput input, .stTextArea textarea {
-    background: #FFFFFF !important;
-    border: 1.5px solid #E2E1DD !important;
+    background: #ffffff !important;
+    border: 1.5px solid #E2DDD5 !important;
     border-radius: 8px !important;
-    color: #18181B !important;
+    color: #1d1c17 !important;
     font-size: 0.875rem !important;
 }
 .stTextInput input:focus, .stTextArea textarea:focus {
-    border-color: #2563EB !important;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.08) !important;
+    border-color: #7b9bbf !important;
+    box-shadow: 0 0 0 3px rgba(123,155,191,0.18) !important;
 }
 
-/* ── Expanders ────────────────────────────────────────────────────── */
+/* ── Expanders ───────────────────────────────────────────────────────── */
 [data-testid="stExpander"] {
-    background: #FFFFFF !important;
-    border: 1px solid #E8E7E3 !important;
+    background: #ffffff !important;
+    border: 1px solid #E2DDD5 !important;
     border-radius: 10px !important;
     overflow: hidden !important;
 }
 
-/* ── Dividers ─────────────────────────────────────────────────────── */
-hr { border-color: #E8E7E3 !important; }
+/* ── Dividers ────────────────────────────────────────────────────────── */
+hr { border-color: #E2DDD5 !important; }
 
-/* ── Captions / small text ────────────────────────────────────────── */
+/* ── Captions / small text ───────────────────────────────────────────── */
 small, .stCaption, [data-testid="stCaptionContainer"] {
-    font-size: 0.8125rem !important;
-    color: #A1A1AA !important;
+    font-size: 0.75rem !important;
+    color: #9A9590 !important;
     line-height: 1.5 !important;
+    letter-spacing: 0.01em !important;
 }
 
-/* ── File uploader ────────────────────────────────────────────────── */
+/* ── File uploader (seamless in sidebar) ─────────────────────────────── */
+[data-testid="stFileUploader"] > section {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
 [data-testid="stFileUploaderDropzone"] {
-    border-radius: 10px !important;
-    border: 1.5px dashed #D4D2CE !important;
-    background: #FAFAF9 !important;
-    transition: border-color 0.15s, background 0.15s !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0.25rem 0 !important;
 }
-[data-testid="stFileUploaderDropzone"]:hover {
-    border-color: #2563EB !important;
-    background: #EFF6FF !important;
+[data-testid="stFileUploader"] button,
+[data-testid="stFileUploaderDropzone"] button {
+    background: #ffffff !important;
+    border: 1px solid #d4cfc7 !important;
+    border-radius: 8px !important;
+    font-size: 0.8rem !important;
+    padding: 0.3rem 1rem !important;
+    color: #1d1c17 !important;
+    width: auto !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
 }
 
-/* ── Dataframe ────────────────────────────────────────────────────── */
+/* ── Dataframe ───────────────────────────────────────────────────────── */
 [data-testid="stDataFrameResizable"] {
-    border: 1px solid #E8E7E3 !important;
-    border-radius: 10px !important;
+    border: 1px solid #E2DDD5 !important;
+    border-radius: 12px !important;
     overflow: hidden !important;
+    box-shadow: 0 4px 12px -2px rgba(123,155,191,0.06) !important;
 }
 
-/* ── Selectbox ────────────────────────────────────────────────────── */
+/* ── Selectbox ───────────────────────────────────────────────────────── */
 [data-testid="stSelectbox"] > div > div {
-    background: #FFFFFF !important;
-    border: 1.5px solid #E2E1DD !important;
+    background: #ffffff !important;
+    border: 1.5px solid #E2DDD5 !important;
     border-radius: 8px !important;
 }
 
-/* ── Alerts ───────────────────────────────────────────────────────── */
+/* ── Alerts ──────────────────────────────────────────────────────────── */
 [data-testid="stAlert"] {
     border-radius: 10px !important;
     font-size: 0.875rem !important;
 }
 
-/* ── Radio labels ─────────────────────────────────────────────────── */
-[data-testid="stRadio"] label {
+/* ── Success / info callouts ─────────────────────────────────────────── */
+[data-testid="stAlert"][data-baseweb="notification"] {
+    border-radius: 10px !important;
+}
+
+/* ── Primary button (type="primary") ────────────────────────────────── */
+[data-testid="stBaseButton-primary"],
+[data-testid="stBaseButton-primary"] button,
+button[data-testid="baseButton-primary"],
+.stButton > button[kind="primary"] {
+    background: #7b9bbf !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
     font-size: 0.875rem !important;
-    color: #3F3F46 !important;
+    letter-spacing: 0em !important;
+    padding: 0.625rem 1.25rem !important;
+    box-shadow: 0 2px 10px rgba(123,155,191,0.3) !important;
+    transition: all 0.2s !important;
+}
+[data-testid="stBaseButton-primary"] p,
+[data-testid="stBaseButton-primary"] button p,
+button[data-testid="baseButton-primary"] p {
+    color: #ffffff !important;
+    line-height: inherit !important;
+}
+[data-testid="stBaseButton-primary"]:hover,
+[data-testid="stBaseButton-primary"] button:hover,
+button[data-testid="baseButton-primary"]:hover,
+.stButton > button[kind="primary"]:hover {
+    background: #6a8daf !important;
+    box-shadow: 0 4px 14px rgba(123,155,191,0.35) !important;
+}
+[data-testid="stBaseButton-primary"]:active,
+button[data-testid="baseButton-primary"]:active,
+.stButton > button[kind="primary"]:active {
+    transform: scale(0.98) !important;
+    box-shadow: none !important;
+}
+
+/* ── Source selector nav buttons (sidebar secondary) ─────────────────── */
+[data-testid="stSidebar"] .stButton > button:not([data-testid="baseButton-primary"]) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    color: #43474d !important;
+    border-radius: 8px !important;
+    font-weight: 400 !important;
+}
+[data-testid="stSidebar"] .stButton > button:not([data-testid="baseButton-primary"]):hover {
+    background: #f0ede8 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+[data-testid="stSidebar"] .stButton > button:not([data-testid="baseButton-primary"]) p {
+    color: #43474d !important;
+    text-align: left !important;
+}
+
+/* ── Sidebar bottom items ────────────────────────────────────────────── */
+.sidebar-bottom-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    color: #6b6869;
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+.sidebar-bottom-item:hover { background: #e9e3d8; }
+
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+
+/* ── Workspace header and summary cards ───────────────────────────────── */
+.workspace-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #E2DDD5;
+    padding: 2rem 0;
+    margin: 0 -1.5rem 1.5rem;
+    width: calc(100% + 3rem);
+    box-shadow: 0 18px 40px -26px rgba(42, 52, 68, 0.25);
+}
+.workspace-header__inner {
+    max-width: none;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0 1.5rem;
+}
+.workspace-header__title {
+    margin: 0;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1d1c17;
+    font-family: 'Metropolis', serif !important;
+    line-height: 1.02;
+}
+.workspace-header__subtitle {
+    margin: 0.75rem 0 0;
+    color: #616161;
+    font-size: 1rem;
+    max-width: 740px;
+}
+.workspace-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+.workspace-header__button {
+    border: 1px solid #E2DDD5;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #1d1c17;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.workspace-header__button.primary {
+    background: #7b9bbf;
+    color: #ffffff;
+    border: none;
+}
+.workspace-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin: 0 -1.5rem 1.5rem;
+    width: calc(100% + 3rem);
+}
+.workspace-summary__card {
+    background: #ffffff;
+    border: 1px solid #E2DDD5;
+    border-radius: 22px;
+    padding: 1.5rem;
+    min-height: 170px;
+    box-shadow: 0 16px 40px -28px rgba(123,155,191,0.12);
+}
+.workspace-summary__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9A9590;
+    margin-bottom: 0.5rem;
+}
+.workspace-summary__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1d1c17;
+    margin: 0;
+}
+.workspace-summary__meta {
+    margin-top: 0.5rem;
+    color: #6b6869;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+    .workspace-summary { grid-template-columns: 1fr !important; }
+    .workspace-header__inner { flex-direction: column; align-items: stretch; }
 }
 
 </style>
@@ -303,29 +598,29 @@ def _schema() -> str:
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(
-        '<div style="padding:0.25rem 0 0.75rem 0;">'
-        '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">'
-        '<div style="width:28px;height:28px;background:linear-gradient(135deg,#2563EB 0%,#7C3AED 100%);'
-        'border-radius:7px;flex-shrink:0;"></div>'
-        '<span style="font-size:1.125rem;font-weight:700;letter-spacing:-0.03em;color:#18181B;">InSight</span>'
-        '</div>'
-        '<p style="font-size:0.75rem;color:#A1A1AA;margin:0;line-height:1.4;">AI-powered data analysis</p>'
+        '<div style="padding:0.25rem 0 0.875rem 0;">'
+        '<span class="insight-logo" style="font-size:2.5rem;font-weight:700;'
+        'font-family:\'Metropolis\', serif;letter-spacing:-0.03em;color:#C4622D;display:block;line-height:1;">InSight</span>'
         '</div>',
         unsafe_allow_html=True,
     )
-    st.divider()
-
+    if st.button("＋  New Analysis", type="primary", use_container_width=True):
+        st.session_state.messages = []
+        st.session_state.history = []
+        st.rerun()
     # -- Data source --
     st.markdown(
-        '<p style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;'
-        'letter-spacing:0.07em;color:#A1A1AA;margin-bottom:0.5rem;">Data source</p>',
+        '<p style="font-size:0.875rem;font-weight:600;color:#1d1c17;margin:1.25rem 0 0.1rem 0;">Data source</p>',
         unsafe_allow_html=True,
     )
-    source = st.radio(
-        "source",
-        ["Upload file(s)", "Google Sheets", "SQL Database", "Demo: Companies House"],
-        label_visibility="collapsed",
-    )
+    _src_options = ["Upload file(s)", "Google Sheets", "SQL Database", "Demo: Companies House"]
+    if "source_sel" not in st.session_state:
+        st.session_state.source_sel = _src_options[0]
+    for _s in _src_options:
+        if st.button(_s, key=f"src_{_s}", use_container_width=True):
+            st.session_state.source_sel = _s
+            st.rerun()
+    source = st.session_state.source_sel
 
     if source == "Upload file(s)":
         files = st.file_uploader(
@@ -372,8 +667,7 @@ with st.sidebar:
     if st.session_state.datasets:
         st.divider()
         st.markdown(
-            '<p style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;'
-            'letter-spacing:0.07em;color:#A1A1AA;margin-bottom:0.5rem;">Loaded datasets</p>',
+            '<p style="font-size:0.875rem;font-weight:600;color:#1d1c17;margin:0.25rem 0 0.375rem 0;">Loaded datasets</p>',
             unsafe_allow_html=True,
         )
         for key in list(st.session_state.datasets.keys()):
@@ -429,8 +723,7 @@ with st.sidebar:
     # -- Workspaces --
     st.divider()
     st.markdown(
-        '<p style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;'
-        'letter-spacing:0.07em;color:#A1A1AA;margin-bottom:0.5rem;">Workspaces</p>',
+        '<p style="font-size:0.875rem;font-weight:600;color:#1d1c17;margin:0.25rem 0 0.375rem 0;">Workspaces</p>',
         unsafe_allow_html=True,
     )
     ws_name = st.text_input("Save as", placeholder="my-analysis", label_visibility="collapsed")
@@ -461,52 +754,60 @@ with st.sidebar:
                     delete_workspace(selected_ws)
                     st.rerun()
 
-    # -- Actions --
-    if st.session_state.datasets:
+    # -- Export actions --
+    if st.session_state.datasets and st.session_state.messages:
         st.divider()
-        c1, c2 = st.columns(2)
-        with c1:
-            if st.button("New chat", use_container_width=True):
-                st.session_state.messages = []
-                st.session_state.history = []
-                st.rerun()
-        with c2:
-            if st.session_state.messages:
-                html = generate_html_report(st.session_state.messages)
-                st.download_button(
-                    "Export HTML",
-                    data=html,
-                    file_name="insight_report.html",
-                    mime="text/html",
-                    use_container_width=True,
-                )
+        st.markdown(
+            '<p style="font-size:0.875rem;font-weight:600;color:#1d1c17;margin:0.25rem 0 0.375rem 0;">Export</p>',
+            unsafe_allow_html=True,
+        )
+        html = generate_html_report(st.session_state.messages)
+        st.download_button(
+            "Export HTML",
+            data=html,
+            file_name="insight_report.html",
+            mime="text/html",
+            use_container_width=True,
+        )
+        chat_text = "\n\n".join(
+            f"{'You' if m['role'] == 'user' else 'InSight'}: {m['content']}"
+            for m in st.session_state.messages
+        )
+        st.download_button(
+            "Export TXT",
+            data=chat_text,
+            file_name="insight_conversation.txt",
+            mime="text/plain",
+            use_container_width=True,
+        )
 
-        if st.session_state.messages:
-            chat_text = "\n\n".join(
-                f"{'You' if m['role'] == 'user' else 'InSight'}: {m['content']}"
-                for m in st.session_state.messages
-            )
-            st.download_button(
-                "Export TXT",
-                data=chat_text,
-                file_name="insight_conversation.txt",
-                mime="text/plain",
-                use_container_width=True,
-            )
 
 
 # ── Main area ─────────────────────────────────────────────────────────────────
 df = _active_df()
 
+st.markdown(
+    '''
+    <div class="workspace-header">
+      <div class="workspace-header__inner">
+        <div>
+          <h1 class="workspace-header__title">Workspace</h1>
+          <p class="workspace-header__subtitle">View data, ask questions, and surface insights with AI-powered analysis.</p>
+        </div>
+        <div class="workspace-header__actions">
+          <span class="workspace-header__button">All data</span>
+          <span class="workspace-header__button">Workspaces</span>
+        </div>
+      </div>
+    </div>
+    ''',
+    unsafe_allow_html=True,
+)
+
 if df is None:
     st.markdown(
-        '<div style="padding:2.5rem 0 2rem 0;">'
-        '<div style="display:flex;align-items:center;gap:0.875rem;margin-bottom:1rem;">'
-        '<div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB 0%,#7C3AED 100%);'
-        'border-radius:12px;flex-shrink:0;box-shadow:0 4px 14px rgba(37,99,235,0.25);"></div>'
-        '<h1 style="font-size:2.5rem;font-weight:700;letter-spacing:-0.04em;color:#18181B;margin:0;">InSight</h1>'
-        '</div>'
-        '<p style="font-size:1.125rem;color:#71717A;font-weight:400;margin:0;line-height:1.6;">'
+        '<div style="padding:2rem 0 1.5rem 0;">'
+        '<p style="font-size:1.125rem;color:#6b6869;font-weight:400;margin:0;line-height:1.65;">'
         'Ask questions about your data in plain English.</p>'
         '</div>',
         unsafe_allow_html=True,
@@ -514,33 +815,33 @@ if df is None:
     ca, cb, cc = st.columns(3)
     with ca:
         st.markdown(
-            '<div style="background:#FAFAF9;border:1px solid #E8E7E3;border-radius:12px;'
-            'padding:1.25rem 1.5rem;height:100%;">'
-            '<p style="font-size:0.8125rem;font-weight:600;color:#18181B;margin:0 0 0.375rem 0;'
-            'letter-spacing:-0.01em;">Load data</p>'
-            '<p style="font-size:0.8125rem;color:#71717A;margin:0;line-height:1.6;">'
+            '<div style="background:#ffffff;border:1px solid #E2DDD5;border-radius:12px;'
+            'padding:1.25rem 1.5rem;height:100%;box-shadow:0 4px 20px -2px rgba(123,155,191,0.06);">'
+            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:0.875rem;font-weight:600;'
+            'color:#1d1c17;margin:0 0 0.375rem 0;">Load data</p>'
+            '<p style="font-size:0.8125rem;color:#6b6869;margin:0;line-height:1.65;">'
             'Upload CSV or Excel files, connect to a SQL database, or pull from Google Sheets using the sidebar.</p>'
             '</div>',
             unsafe_allow_html=True,
         )
     with cb:
         st.markdown(
-            '<div style="background:#FAFAF9;border:1px solid #E8E7E3;border-radius:12px;'
-            'padding:1.25rem 1.5rem;height:100%;">'
-            '<p style="font-size:0.8125rem;font-weight:600;color:#18181B;margin:0 0 0.375rem 0;'
-            'letter-spacing:-0.01em;">Ask anything</p>'
-            '<p style="font-size:0.8125rem;color:#71717A;margin:0;line-height:1.6;">'
+            '<div style="background:#ffffff;border:1px solid #E2DDD5;border-radius:12px;'
+            'padding:1.25rem 1.5rem;height:100%;box-shadow:0 4px 20px -2px rgba(123,155,191,0.06);">'
+            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:0.875rem;font-weight:600;'
+            'color:#1d1c17;margin:0 0 0.375rem 0;">Ask anything</p>'
+            '<p style="font-size:0.8125rem;color:#6b6869;margin:0;line-height:1.65;">'
             'InSight runs real Python code on your full dataset to give exact answers, metrics, and charts.</p>'
             '</div>',
             unsafe_allow_html=True,
         )
     with cc:
         st.markdown(
-            '<div style="background:#FAFAF9;border:1px solid #E8E7E3;border-radius:12px;'
-            'padding:1.25rem 1.5rem;height:100%;">'
-            '<p style="font-size:0.8125rem;font-weight:600;color:#18181B;margin:0 0 0.375rem 0;'
-            'letter-spacing:-0.01em;">Explore</p>'
-            '<p style="font-size:0.8125rem;color:#71717A;margin:0;line-height:1.6;">'
+            '<div style="background:#ffffff;border:1px solid #E2DDD5;border-radius:12px;'
+            'padding:1.25rem 1.5rem;height:100%;box-shadow:0 4px 20px -2px rgba(123,155,191,0.06);">'
+            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:0.875rem;font-weight:600;'
+            'color:#1d1c17;margin:0 0 0.375rem 0;">Explore</p>'
+            '<p style="font-size:0.8125rem;color:#6b6869;margin:0;line-height:1.65;">'
             'Browse your data, see auto-generated column statistics in Profile, or save your work as a Workspace.</p>'
             '</div>',
             unsafe_allow_html=True,
@@ -552,6 +853,30 @@ else:
             st.error(msg)
         else:
             st.warning(msg)
+
+    s = get_summary(df)
+    st.markdown(
+        f'''
+        <div class="workspace-summary">
+          <div class="workspace-summary__card">
+            <div class="workspace-summary__label">Rows</div>
+            <div class="workspace-summary__value">{s['rows']:,}</div>
+            <div class="workspace-summary__meta">Dataset size</div>
+          </div>
+          <div class="workspace-summary__card">
+            <div class="workspace-summary__label">Columns</div>
+            <div class="workspace-summary__value">{s['columns']}</div>
+            <div class="workspace-summary__meta">Fields available for analysis</div>
+          </div>
+          <div class="workspace-summary__card">
+            <div class="workspace-summary__label">Active dataset</div>
+            <div class="workspace-summary__value">{st.session_state.active_key or 'None'}</div>
+            <div class="workspace-summary__meta">Selected workspace data</div>
+          </div>
+        </div>
+        ''',
+        unsafe_allow_html=True,
+    )
 
     chat_tab, data_tab, profile_tab, help_tab = st.tabs(["💬 Chat", "📋 Data", "📊 Profile", "ℹ️ Help"])
 
