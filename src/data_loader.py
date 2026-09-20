@@ -1,22 +1,25 @@
 import pandas as pd
 
 
-def load_file(file):
+def load_file(file) -> pd.DataFrame:
     name = getattr(file, 'name', str(file))
     if str(name).endswith(('.xlsx', '.xls')):
         return pd.read_excel(file)
     try:
-        return pd.read_csv(file, encoding='utf-8')
-    except UnicodeDecodeError:
-        if hasattr(file, 'seek'):
-            file.seek(0)
-        return pd.read_csv(file, encoding='latin-1')
+        try:
+            return pd.read_csv(file, encoding='utf-8')
+        except UnicodeDecodeError:
+            if hasattr(file, 'seek'):
+                file.seek(0)
+            return pd.read_csv(file, encoding='latin-1')
+    except (pd.errors.EmptyDataError, pd.errors.ParserError) as e:
+        raise ValueError(f"Could not parse '{name}' as CSV: {e}")
 
 
 load_csv = load_file
 
 
-def build_schema(df):
+def build_schema(df: pd.DataFrame) -> str:
     lines = []
     for col in df.columns:
         dtype = "num" if pd.api.types.is_numeric_dtype(df[col]) else "str"
@@ -25,11 +28,11 @@ def build_schema(df):
     return "\n".join(lines)
 
 
-def get_sample(df):
+def get_sample(df: pd.DataFrame) -> str:
     return df.head(5).to_json(orient="records")
 
 
-def get_summary(df):
+def get_summary(df: pd.DataFrame) -> dict:
     return {
         "rows": len(df),
         "columns": len(df.columns),

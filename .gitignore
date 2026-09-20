@@ -40,6 +40,7 @@ Thumbs.db
 
 # uploads (never commit user data)
 uploads/
+workspaces/
 *.csv
 *.xlsx
 *.xls

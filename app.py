@@ -631,7 +631,10 @@ with st.sidebar:
             for f in files:
                 if f.name not in st.session_state.datasets:
                     with st.spinner(f"Loading {f.name}…"):
-                        _register_dataset(f.name, load_file(f), reset_chat=False)
+                        try:
+                            _register_dataset(f.name, load_file(f), reset_chat=False)
+                        except ValueError as e:
+                            st.error(str(e))
             st.session_state.active_key = st.session_state.active_key or (files[0].name if files else None)
 
     elif source == "Google Sheets":
