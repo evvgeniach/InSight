@@ -35,3 +35,13 @@ def get_summary(df):
         "columns": len(df.columns),
         "column_names": df.columns.tolist()
     }
+
+
+def build_multi_schema(datasets: dict, active_key: str) -> str:
+    parts = [f"ACTIVE DATASET: {active_key}\n{build_schema(datasets[active_key])}"]
+    others = {k: v for k, v in datasets.items() if k != active_key}
+    if others:
+        parts.append("\nOTHER AVAILABLE DATASETS (accessible in Python via datasets['name']):")
+        for name, df in others.items():
+            parts.append(f"\n{name}:\n{build_schema(df)}")
+    return "\n".join(parts)

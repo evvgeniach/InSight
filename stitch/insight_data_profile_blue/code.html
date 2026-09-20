@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef9f1;
+        }
+    </style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {tertiary: "#615e58", "surface-bright": "#fef9f1", "on-tertiary-fixed-variant": "#494741", "on-surface": "#1d1c17", "surface-container-high": "#ece8e0", "inverse-surface": "#32302b", "on-secondary-container": "#6e2a00", "tertiary-fixed": "#e7e2da", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#7a3000", "on-tertiary-container": "#32302b", surface: "#fef9f1", "on-primary-fixed": "#001d34", "surface-dim": "#ded9d2", primary: "#416182", "secondary-fixed-dim": "#ffb693", "on-tertiary": "#ffffff", "surface-tint": "#416182", "on-secondary-fixed": "#351000", outline: "#73777e", "primary-container": "#7b9bbf", "on-surface-variant": "#43474d", "on-secondary": "#ffffff", "secondary-container": "#fd8e55", "on-background": "#1d1c17", "on-primary": "#ffffff", "surface-container-highest": "#e7e2da", "surface-container-low": "#f8f3eb", "on-error": "#ffffff", "on-primary-container": "#0c3251", "inverse-primary": "#a9c9ef", "on-tertiary-fixed": "#1d1b17", "secondary-fixed": "#ffdbcc", "tertiary-container": "#9c9891", background: "#fef9f1", secondary: "#9c440f", "primary-fixed": "#d0e4ff", "surface-container-lowest": "#ffffff", error: "#ba1a1a", "tertiary-fixed-dim": "#cac6be", "surface-container": "#f2ede5", "on-primary-fixed-variant": "#284969", "primary-fixed-dim": "#a9c9ef", "surface-variant": "#e7e2da", "inverse-on-surface": "#f5f0e8", "outline-variant": "#c3c7ce", "error-container": "#ffdad6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "24px", lg: "24px", unit: "8px", md: "16px", sm: "8px", xxl: "64px", "container-max": "1440px", xs: "4px", xl: "40px"}, fontFamily: {h2: ["Metropolis"], "body-lg": ["Inter"], h1: ["Metropolis"], h3: ["Metropolis"], "label-caps": ["Inter"], display: ["Metropolis"], "body-sm": ["Inter"], "data-tabular": ["Inter"], "body-md": ["Inter"], headline: ["Metropolis"], body: ["Inter"], label: ["Inter"]}, fontSize: {h2: ["24px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500"}], "body-lg": ["18px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], h3: ["20px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "500"}], "label-caps": ["12px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], "data-tabular": ["14px", {lineHeight: "1", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased overflow-x-hidden">
+<!-- Fixed Side Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[280px] border-r border-stone-200 bg-stone-50 flex flex-col py-8 px-6 z-50">
+<div class="mb-10">
+<h1 class="text-orange-700 font-serif font-bold text-2xl tracking-tight">InSight</h1>
+<p class="text-stone-500 font-body-sm mt-1">Editorial Analytics</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#7B9BBF] font-semibold border-r-2 border-[#7B9BBF] bg-blue-50/50 rounded-l-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-medium">Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-medium">Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium">Archives</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<button class="w-full bg-[#7B9BBF] text-white py-3 px-4 rounded-lg font-medium shadow-sm active:scale-[0.98] transition-transform flex items-center justify-center gap-2 mb-6">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Analysis
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-sm">Support</span>
+</a>
+<div class="pt-6 mt-6 border-t border-stone-200 flex items-center gap-3">
+<img alt="User profile" class="w-10 h-10 rounded-full" data-alt="A professional headshot of a mature male data analyst with a friendly expression. He is wearing a crisp linen shirt and stylish glasses. The background is a soft, out-of-focus light-filled office space with warm wooden tones and dusty blue accents, maintaining a sophisticated editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzmi28fbIL1EDmyWC56q6oL6wvn-hXRaETkLWnsuc8ZeWTIDHDzgAsDsPLnxOAxNPMxdlE154ptjuOd8dlC3aBM06dWNB9VSEH7Hnu7kYMw3xfPdkLV0lmb0re_CK3ae6_M2DxDe5nBxtOYY4rqYmlHppjVLr6v7Hlo-XsCTGYeQtDmoB7N6y7eipSBZg1CXo2CBWeLdbhig0caEvqXgHc4hwZJbQ4zriUcHb8XU7YgK4p_QTMtmVt8ubdte-q9ETd-Fk6m3i53lw"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-on-surface font-semibold text-sm truncate">Julian Pierce</p>
+<p class="text-stone-500 text-xs truncate">Senior Analyst</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen bg-surface-container-low">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-stone-200">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-8">
+<h2 class="text-stone-900 font-h2 font-bold tracking-tight">Workspace</h2>
+<nav class="hidden md:flex gap-6">
+<a class="text-stone-500 hover:text-[#7B9BBF] font-body-sm transition-all pb-5" href="#">Drafts</a>
+<a class="text-[#7B9BBF] border-b-2 border-[#7B9BBF] font-body-sm transition-all pb-5" href="#">Published</a>
+<a class="text-stone-500 hover:text-[#7B9BBF] font-body-sm transition-all pb-5" href="#">Scheduled</a>
+<a class="text-stone-500 hover:text-[#7B9BBF] font-body-sm transition-all pb-5" href="#">Team</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications_none">notifications_none</span>
+</button>
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="max-w-[1440px] mx-auto p-gutter xl:p-xl space-y-lg">
+<!-- Page Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-stone-200 pb-lg">
+<div>
+<span class="text-label-caps font-label-caps text-secondary uppercase tracking-widest">Active Dataset</span>
+<h1 class="text-h1 font-h1 mt-2">Q4 Performance Profile</h1>
+<p class="text-stone-500 mt-2 max-w-2xl">A comprehensive deep dive into fiscal performance, workforce distribution, and operational efficiency metrics for the current reporting period.</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-4 py-2 border border-stone-200 rounded-lg text-body-sm font-medium hover:bg-white transition-colors">Export CSV</button>
+<button class="px-4 py-2 bg-[#7B9BBF] text-white rounded-lg text-body-sm font-medium shadow-sm hover:opacity-90 transition-opacity">Share Profile</button>
+</div>
+</section>
+<!-- Profile Content -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Numeric Columns Section -->
+<div class="col-span-12">
+<div class="flex items-center justify-between mb-md">
+<h3 class="text-h3 font-h3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#7B9BBF]" data-icon="calculate">calculate</span>
+                            Numeric columns
+                        </h3>
+<span class="px-2 py-1 bg-blue-50 text-[#7B9BBF] rounded-md text-[10px] font-bold font-label-caps">3 METRICS FOUND</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Revenue Card -->
+<div class="bg-surface-container-lowest border border-[#E2DDD5] p-lg rounded-xl shadow-[0_4px_12px_rgba(123,155,191,0.05)] transition-all hover:shadow-[0_8px_24px_rgba(123,155,191,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<span class="text-label-caps font-label-caps text-stone-500">TOTAL REVENUE</span>
+<span class="px-2 py-1 bg-green-50 text-green-700 rounded-full text-[10px] font-bold">+12.4%</span>
+</div>
+<div class="text-h2 font-h2 mb-1">$4,289,500</div>
+<div class="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden mt-4">
+<div class="bg-[#7B9BBF] h-full w-3/4 rounded-full"></div>
+</div>
+<div class="flex justify-between mt-2 text-body-sm text-stone-400">
+<span>Dist: Gaussian</span>
+<span>Outliers: 2</span>
+</div>
+</div>
+<!-- Profit Card -->
+<div class="bg-surface-container-lowest border border-[#E2DDD5] p-lg rounded-xl shadow-[0_4px_12px_rgba(123,155,191,0.05)] transition-all hover:shadow-[0_8px_24px_rgba(123,155,191,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<span class="text-label-caps font-label-caps text-stone-500">NET PROFIT</span>
+<span class="px-2 py-1 bg-amber-50 text-amber-700 rounded-full text-[10px] font-bold">Stable</span>
+</div>
+<div class="text-h2 font-h2 mb-1">$842,200</div>
+<div class="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden mt-4">
+<div class="bg-secondary-container h-full w-[62%] rounded-full"></div>
+</div>
+<div class="flex justify-between mt-2 text-body-sm text-stone-400">
+<span>Skew: 0.42</span>
+<span>Std Dev: 1.2k</span>
+</div>
+</div>
+<!-- Employees Card -->
+<div class="bg-surface-container-lowest border border-[#E2DDD5] p-lg rounded-xl shadow-[0_4px_12px_rgba(123,155,191,0.05)] transition-all hover:shadow-[0_8px_24px_rgba(123,155,191,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<span class="text-label-caps font-label-caps text-stone-500">HEADCOUNT</span>
+<span class="px-2 py-1 bg-blue-50 text-[#7B9BBF] rounded-full text-[10px] font-bold">+4</span>
+</div>
+<div class="text-h2 font-h2 mb-1">1,248</div>
+<div class="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden mt-4">
+<div class="bg-primary h-full w-[88%] rounded-full"></div>
+</div>
+<div class="flex justify-between mt-2 text-body-sm text-stone-400">
+<span>Capacity: 92%</span>
+<span>Vacancies: 12</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Categorical Columns Section -->
+<div class="col-span-12 lg:col-span-4 space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="text-h3 font-h3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#7B9BBF]" data-icon="category">category</span>
+                            Categorical columns
+                        </h3>
+</div>
+<div class="bg-white rounded-xl border border-stone-200 divide-y divide-stone-100 overflow-hidden">
+<div class="p-md flex items-center justify-between hover:bg-stone-50 transition-colors">
+<div>
+<p class="font-medium text-stone-900">Region</p>
+<p class="text-body-sm text-stone-500">5 Unique values</p>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-[#7B9BBF] border-2 border-white"></div>
+<div class="w-6 h-6 rounded-full bg-secondary-container border-2 border-white"></div>
+<div class="w-6 h-6 rounded-full bg-stone-200 border-2 border-white"></div>
+</div>
+</div>
+<div class="p-md flex items-center justify-between hover:bg-stone-50 transition-colors">
+<div>
+<p class="font-medium text-stone-900">Department</p>
+<p class="text-body-sm text-stone-500">12 Unique values</p>
+</div>
+<span class="material-symbols-outlined text-stone-300" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-md flex items-center justify-between hover:bg-stone-50 transition-colors">
+<div>
+<p class="font-medium text-stone-900">Fiscal Quarter</p>
+<p class="text-body-sm text-stone-500">4 Unique values</p>
+</div>
+<span class="material-symbols-outlined text-stone-300" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-md flex items-center justify-between hover:bg-stone-50 transition-colors">
+<div>
+<p class="font-medium text-stone-900">Priority Level</p>
+<p class="text-body-sm text-stone-500">3 Unique values</p>
+</div>
+<span class="material-symbols-outlined text-stone-300" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Analysis Sidebar (Bento style) -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-white rounded-xl border border-stone-200 h-full p-lg overflow-hidden flex flex-col">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="text-h3 font-h3">Data Distribution</h3>
+<div class="flex gap-2">
+<button class="p-1.5 rounded bg-stone-100 text-stone-600"><span class="material-symbols-outlined text-sm" data-icon="bar_chart">bar_chart</span></button>
+<button class="p-1.5 rounded text-stone-400 hover:bg-stone-50"><span class="material-symbols-outlined text-sm" data-icon="show_chart">show_chart</span></button>
+</div>
+</div>
+<div class="flex-1 min-h-[300px] flex items-end gap-3 px-4">
+<!-- Visualizing a histogram -->
+<div class="flex-1 bg-blue-50 rounded-t-lg h-[40%] group relative">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Val: 1.2k</div>
+</div>
+<div class="flex-1 bg-blue-100 rounded-t-lg h-[55%]"></div>
+<div class="flex-1 bg-blue-200 rounded-t-lg h-[75%]"></div>
+<div class="flex-1 bg-[#7B9BBF] rounded-t-lg h-[95%]"></div>
+<div class="flex-1 bg-blue-200 rounded-t-lg h-[65%]"></div>
+<div class="flex-1 bg-blue-100 rounded-t-lg h-[45%]"></div>
+<div class="flex-1 bg-blue-50 rounded-t-lg h-[30%]"></div>
+<div class="flex-1 bg-blue-50 rounded-t-lg h-[15%]"></div>
+</div>
+<div class="mt-lg pt-lg border-t border-stone-100 flex justify-between">
+<div class="text-center px-4">
+<p class="text-label-caps font-label-caps text-stone-400">MEAN</p>
+<p class="text-h3 font-h3 text-stone-900">421.2</p>
+</div>
+<div class="text-center px-4 border-x border-stone-100">
+<p class="text-label-caps font-label-caps text-stone-400">MEDIAN</p>
+<p class="text-h3 font-h3 text-stone-900">398.5</p>
+</div>
+<div class="text-center px-4">
+<p class="text-label-caps font-label-caps text-stone-400">KURTOSIS</p>
+<p class="text-h3 font-h3 text-stone-900">2.41</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Correlation Heatmap -->
+<div class="col-span-12">
+<div class="bg-stone-900 rounded-2xl p-xl shadow-xl overflow-hidden relative group">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-orange-500/10 to-transparent pointer-events-none"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-xl">
+<div>
+<h3 class="text-h3 font-h3 text-white">Correlation Matrix</h3>
+<p class="text-stone-400 font-body-sm">Identifying cross-variable relationships and dependencies</p>
+</div>
+<div class="flex items-center gap-4 bg-stone-800/50 p-1.5 rounded-lg border border-white/10">
+<button class="px-3 py-1 rounded text-xs font-medium bg-[#7B9BBF] text-white">Pearson</button>
+<button class="px-3 py-1 rounded text-xs font-medium text-stone-400 hover:text-white transition-colors">Spearman</button>
+</div>
+</div>
+<!-- Heatmap Grid -->
+<div class="grid grid-cols-6 gap-2">
+<div class="col-span-1"></div>
+<div class="text-[10px] text-stone-500 text-center uppercase tracking-widest font-bold">Rev.</div>
+<div class="text-[10px] text-stone-500 text-center uppercase tracking-widest font-bold">Exp.</div>
+<div class="text-[10px] text-stone-500 text-center uppercase tracking-widest font-bold">Emp.</div>
+<div class="text-[10px] text-stone-500 text-center uppercase tracking-widest font-bold">Churn</div>
+<div class="text-[10px] text-stone-500 text-center uppercase tracking-widest font-bold">Growth</div>
+<!-- Row 1 -->
+<div class="text-[10px] text-stone-500 flex items-center justify-end pr-4 uppercase tracking-widest font-bold">Rev.</div>
+<div class="aspect-square bg-[#7B9BBF] rounded-lg flex items-center justify-center text-white font-bold text-xs">1.0</div>
+<div class="aspect-square bg-[#7B9BBF]/80 rounded-lg flex items-center justify-center text-white/90 font-bold text-xs">0.82</div>
+<div class="aspect-square bg-[#7B9BBF]/40 rounded-lg flex items-center justify-center text-white/70 font-bold text-xs">0.45</div>
+<div class="aspect-square bg-orange-700/30 rounded-lg flex items-center justify-center text-orange-200/70 font-bold text-xs">-0.12</div>
+<div class="aspect-square bg-[#7B9BBF]/60 rounded-lg flex items-center justify-center text-white/80 font-bold text-xs">0.68</div>
+<!-- Row 2 -->
+<div class="text-[10px] text-stone-500 flex items-center justify-end pr-4 uppercase tracking-widest font-bold">Exp.</div>
+<div class="aspect-square bg-[#7B9BBF]/80 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF] rounded-lg flex items-center justify-center text-white font-bold text-xs">1.0</div>
+<div class="aspect-square bg-[#7B9BBF]/50 rounded-lg"></div>
+<div class="aspect-square bg-orange-700/10 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF]/30 rounded-lg"></div>
+<!-- Row 3 -->
+<div class="text-[10px] text-stone-500 flex items-center justify-end pr-4 uppercase tracking-widest font-bold">Emp.</div>
+<div class="aspect-square bg-[#7B9BBF]/40 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF]/50 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF] rounded-lg flex items-center justify-center text-white font-bold text-xs">1.0</div>
+<div class="aspect-square bg-orange-700/40 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF]/20 rounded-lg"></div>
+<!-- Row 4 -->
+<div class="text-[10px] text-stone-500 flex items-center justify-end pr-4 uppercase tracking-widest font-bold">Churn</div>
+<div class="aspect-square bg-orange-700/30 rounded-lg"></div>
+<div class="aspect-square bg-orange-700/10 rounded-lg"></div>
+<div class="aspect-square bg-orange-700/40 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF] rounded-lg flex items-center justify-center text-white font-bold text-xs">1.0</div>
+<div class="aspect-square bg-orange-700/80 rounded-lg"></div>
+<!-- Row 5 -->
+<div class="text-[10px] text-stone-500 flex items-center justify-end pr-4 uppercase tracking-widest font-bold">Growth</div>
+<div class="aspect-square bg-[#7B9BBF]/60 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF]/30 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF]/20 rounded-lg"></div>
+<div class="aspect-square bg-orange-700/80 rounded-lg"></div>
+<div class="aspect-square bg-[#7B9BBF] rounded-lg flex items-center justify-center text-white font-bold text-xs">1.0</div>
+</div>
+<div class="mt-8 flex items-center justify-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-orange-700"></div>
+<span class="text-xs text-stone-500">Negative (-1.0)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-12 h-2 rounded-full bg-gradient-to-r from-orange-700 via-stone-800 to-[#7B9BBF]"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#7B9BBF]"></div>
+<span class="text-xs text-stone-500">Positive (+1.0)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Info -->
+<footer class="max-w-[1440px] mx-auto px-gutter xl:px-xl pb-xxl pt-lg text-center border-t border-stone-200/50 mt-xl">
+<p class="text-stone-400 font-body-sm">
+                Generated by <span class="font-bold text-stone-600">InSight Profile Engine v4.2.1</span> • 
+                Snapshot taken Oct 24, 2023 • 
+                <a class="text-[#7B9BBF] hover:underline" href="#">Download full report</a>
+</p>
+</footer>
+</main>
+<!-- Contextual FAB for quick actions -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-[#7B9BBF] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</button>
+</body></html>
